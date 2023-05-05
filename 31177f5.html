@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Vue3监听div下子元素的数量 | 大博</title><meta name="keywords" content="Vue"><meta name="author" content="DB"><meta name="copyright" content="DB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在Vue3中，可以使用MutationObserver来监听DOM树的变化，包括子元素数量的变化。MutationObserver是一个用于监测DOM树变化的接口，可以在DOM节点的属性或子节点发生变化时收到通知。123&lt;div class&#x3D;&quot;checkerboard&quot; ref&#x3D;&quot;checkerboard&quot; id&#x3D;&quot;gridContainer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue3监听div下子元素的数量">
+<meta property="og:url" content="http://example.com/31177f5.html">
+<meta property="og:site_name" content="大博">
+<meta property="og:description" content="在Vue3中，可以使用MutationObserver来监听DOM树的变化，包括子元素数量的变化。MutationObserver是一个用于监测DOM树变化的接口，可以在DOM节点的属性或子节点发生变化时收到通知。123&lt;div class&#x3D;&quot;checkerboard&quot; ref&#x3D;&quot;checkerboard&quot; id&#x3D;&quot;gridContainer">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2022/04/29/LvoXHe.png">
+<meta property="article:published_time" content="2023-05-05T06:44:34.000Z">
+<meta property="article:modified_time" content="2023-05-05T06:52:14.858Z">
+<meta property="article:author" content="DB">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2022/04/29/LvoXHe.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/31177f5"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Vue3监听div下子元素的数量',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-05 14:52:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://s1.ax1x.com/2022/04/29/LvbDbT.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s1.ax1x.com/2022/04/29/LvTVEQ.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">大博</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Vue3监听div下子元素的数量</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-05T06:44:34.000Z" title="发表于 2023-05-05 14:44:34">2023-05-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-05T06:52:14.858Z" title="更新于 2023-05-05 14:52:14">2023-05-05</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Vue3监听div下子元素的数量"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="在Vue3中，可以使用MutationObserver来监听DOM树的变化，包括子元素数量的变化。MutationObserver是一个用于监测DOM树变化的接口，可以在DOM节点的属性或子节点发生变化时收到通知。"><a href="#在Vue3中，可以使用MutationObserver来监听DOM树的变化，包括子元素数量的变化。MutationObserver是一个用于监测DOM树变化的接口，可以在DOM节点的属性或子节点发生变化时收到通知。" class="headerlink" title="在Vue3中，可以使用MutationObserver来监听DOM树的变化，包括子元素数量的变化。MutationObserver是一个用于监测DOM树变化的接口，可以在DOM节点的属性或子节点发生变化时收到通知。"></a>在Vue3中，可以使用MutationObserver来监听DOM树的变化，包括子元素数量的变化。MutationObserver是一个用于监测DOM树变化的接口，可以在DOM节点的属性或子节点发生变化时收到通知。</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkerboard&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;checkerboard&quot;</span> <span class="attr">id</span>=<span class="string">&quot;gridContainer&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;placeholder-img&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;item in 9&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="attr">checkerboard</span>: <span class="built_in">any</span> = <span class="title function_">ref</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> observer = <span class="keyword">new</span> <span class="title class_">MutationObserver</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> count = checkerboard.<span class="property">value</span>.<span class="property">childElementCount</span>;</span><br><span class="line">        state.<span class="property">checkerboardChildrenCount</span> = count</span><br><span class="line">    &#125;);</span><br><span class="line">    observer.<span class="title function_">observe</span>(checkerboard.<span class="property">value</span>, &#123; <span class="attr">childList</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用ref指令给div元素添加了一个引用名checkerboard，然后在onMounted生命周期钩子中创建了一个MutationObserver对象，并通过调用observe方法将其绑定到div元素上。在observe方法的第二个参数中，我们设置了childList为true，表示我们想要监测div元素的子节点数量变化。"><a href="#使用ref指令给div元素添加了一个引用名checkerboard，然后在onMounted生命周期钩子中创建了一个MutationObserver对象，并通过调用observe方法将其绑定到div元素上。在observe方法的第二个参数中，我们设置了childList为true，表示我们想要监测div元素的子节点数量变化。" class="headerlink" title="使用ref指令给div元素添加了一个引用名checkerboard，然后在onMounted生命周期钩子中创建了一个MutationObserver对象，并通过调用observe方法将其绑定到div元素上。在observe方法的第二个参数中，我们设置了childList为true，表示我们想要监测div元素的子节点数量变化。"></a>使用ref指令给div元素添加了一个引用名checkerboard，然后在onMounted生命周期钩子中创建了一个MutationObserver对象，并通过调用observe方法将其绑定到div元素上。在observe方法的第二个参数中，我们设置了childList为true，表示我们想要监测div元素的子节点数量变化。</h4><p>每当div元素下的子元素数量发生变化时，MutationObserver会回调我们传递给它的函数，我们在这个回调函数中获取当前div元素的子元素数量，然后打印出来。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>使用MutationObserver可以监听DOM树的变化，包括子元素数量的变化。在Vue3中，可以将它用于监听子元素数量的变化，以便在需要时对页面进行相应的操作。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">DB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/31177f5.html">http://example.com/31177f5.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">大博</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Vue/">Vue</a></div><div class="post_share"><div class="social-share" data-image="https://s1.ax1x.com/2022/04/29/LvoXHe.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/6f2738ac.html"><img class="prev-cover" src="https://s1.ax1x.com/2022/04/29/LvoXHe.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Vue判断页面是否加载完成后，执行事件</div></div></a></div><div class="next-post pull-right"><a href="/9eab505.html"><img class="next-cover" src="https://echarts.apache.org/zh/images/logo.png?_v_=20200710_1" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Echarts踩坑</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/7705a76.html" title="项目笔记"><img class="cover" src="https://s1.ax1x.com/2022/04/29/LvoXHe.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-29</div><div class="title">项目笔记</div></div></a></div><div><a href="/45d2f225.html" title="router"><img class="cover" src="https://s1.ax1x.com/2022/04/29/LvoXHe.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-09</div><div class="title">router</div></div></a></div><div><a href="/6f2738ac.html" title="Vue判断页面是否加载完成后，执行事件"><img class="cover" src="https://s1.ax1x.com/2022/04/29/LvoXHe.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-05-05</div><div class="title">Vue判断页面是否加载完成后，执行事件</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://s1.ax1x.com/2022/04/29/LvbDbT.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">DB</div><div class="author-info__description">卷得卷中卷，方为王中王</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">9</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://haiyong.site/moyu/shengchengshu.html"><i class="iconfont icon-youxishoubing"></i><span>摸鱼</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center"><img src="https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1" width="50" alt="mao"></p> <p align="center">微信号：ZYBo831</p> <p align="center">QQ号：1095450045</p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8Vue3%E4%B8%AD%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8MutationObserver%E6%9D%A5%E7%9B%91%E5%90%ACDOM%E6%A0%91%E7%9A%84%E5%8F%98%E5%8C%96%EF%BC%8C%E5%8C%85%E6%8B%AC%E5%AD%90%E5%85%83%E7%B4%A0%E6%95%B0%E9%87%8F%E7%9A%84%E5%8F%98%E5%8C%96%E3%80%82MutationObserver%E6%98%AF%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BA%8E%E7%9B%91%E6%B5%8BDOM%E6%A0%91%E5%8F%98%E5%8C%96%E7%9A%84%E6%8E%A5%E5%8F%A3%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%9C%A8DOM%E8%8A%82%E7%82%B9%E7%9A%84%E5%B1%9E%E6%80%A7%E6%88%96%E5%AD%90%E8%8A%82%E7%82%B9%E5%8F%91%E7%94%9F%E5%8F%98%E5%8C%96%E6%97%B6%E6%94%B6%E5%88%B0%E9%80%9A%E7%9F%A5%E3%80%82"><span class="toc-number">1.</span> <span class="toc-text">在Vue3中，可以使用MutationObserver来监听DOM树的变化，包括子元素数量的变化。MutationObserver是一个用于监测DOM树变化的接口，可以在DOM节点的属性或子节点发生变化时收到通知。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ref%E6%8C%87%E4%BB%A4%E7%BB%99div%E5%85%83%E7%B4%A0%E6%B7%BB%E5%8A%A0%E4%BA%86%E4%B8%80%E4%B8%AA%E5%BC%95%E7%94%A8%E5%90%8Dcheckerboard%EF%BC%8C%E7%84%B6%E5%90%8E%E5%9C%A8onMounted%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BA%86%E4%B8%80%E4%B8%AAMutationObserver%E5%AF%B9%E8%B1%A1%EF%BC%8C%E5%B9%B6%E9%80%9A%E8%BF%87%E8%B0%83%E7%94%A8observe%E6%96%B9%E6%B3%95%E5%B0%86%E5%85%B6%E7%BB%91%E5%AE%9A%E5%88%B0div%E5%85%83%E7%B4%A0%E4%B8%8A%E3%80%82%E5%9C%A8observe%E6%96%B9%E6%B3%95%E7%9A%84%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0%E4%B8%AD%EF%BC%8C%E6%88%91%E4%BB%AC%E8%AE%BE%E7%BD%AE%E4%BA%86childList%E4%B8%BAtrue%EF%BC%8C%E8%A1%A8%E7%A4%BA%E6%88%91%E4%BB%AC%E6%83%B3%E8%A6%81%E7%9B%91%E6%B5%8Bdiv%E5%85%83%E7%B4%A0%E7%9A%84%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E9%87%8F%E5%8F%98%E5%8C%96%E3%80%82"><span class="toc-number">1.1.</span> <span class="toc-text">使用ref指令给div元素添加了一个引用名checkerboard，然后在onMounted生命周期钩子中创建了一个MutationObserver对象，并通过调用observe方法将其绑定到div元素上。在observe方法的第二个参数中，我们设置了childList为true，表示我们想要监测div元素的子节点数量变化。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/6f2738ac.html" title="Vue判断页面是否加载完成后，执行事件"><img src="https://s1.ax1x.com/2022/04/29/LvoXHe.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue判断页面是否加载完成后，执行事件"/></a><div class="content"><a class="title" href="/6f2738ac.html" title="Vue判断页面是否加载完成后，执行事件">Vue判断页面是否加载完成后，执行事件</a><time datetime="2023-05-05T06:53:35.000Z" title="发表于 2023-05-05 14:53:35">2023-05-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/31177f5.html" title="Vue3监听div下子元素的数量"><img src="https://s1.ax1x.com/2022/04/29/LvoXHe.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Vue3监听div下子元素的数量"/></a><div class="content"><a class="title" href="/31177f5.html" title="Vue3监听div下子元素的数量">Vue3监听div下子元素的数量</a><time datetime="2023-05-05T06:44:34.000Z" title="发表于 2023-05-05 14:44:34">2023-05-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/9eab505.html" title="Echarts踩坑"><img src="https://echarts.apache.org/zh/images/logo.png?_v_=20200710_1" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Echarts踩坑"/></a><div class="content"><a class="title" href="/9eab505.html" title="Echarts踩坑">Echarts踩坑</a><time datetime="2023-05-05T06:27:33.000Z" title="发表于 2023-05-05 14:27:33">2023-05-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/8513d6fd.html" title="flex弹性盒子布局最后一行不满时左对齐实现思路"><img src="https://s1.ax1x.com/2022/05/16/OW163t.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="flex弹性盒子布局最后一行不满时左对齐实现思路"/></a><div class="content"><a class="title" href="/8513d6fd.html" title="flex弹性盒子布局最后一行不满时左对齐实现思路">flex弹性盒子布局最后一行不满时左对齐实现思路</a><time datetime="2022-05-16T03:03:44.000Z" title="发表于 2022-05-16 11:03:44">2022-05-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/78cea6d8.html" title="解决切换路由因高度不够出现滚动条导致页面抖动"><img src="https://s1.ax1x.com/2022/05/16/OW163t.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解决切换路由因高度不够出现滚动条导致页面抖动"/></a><div class="content"><a class="title" href="/78cea6d8.html" title="解决切换路由因高度不够出现滚动条导致页面抖动">解决切换路由因高度不够出现滚动条导致页面抖动</a><time datetime="2022-05-16T02:45:45.000Z" title="发表于 2022-05-16 10:45:45">2022-05-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By DB</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
