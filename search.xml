@@ -171,19 +171,6 @@ import &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vi
       </tags>
   </entry>
   <entry>
-    <title>web3.js监听用户切换钱包状态</title>
-    <url>//eff061d5.html</url>
-    <content><![CDATA[Web3js获取MetaMask钱包并监听切换官方API方法监听账号切换
-import &#123; UserStore &#125; from &#x27;store/modules/user&#x27;export function useWeb3() &#123;    async function getAccount(): Promise&lt;any&gt; &#123;        return new Promise((async (resolve, reject) =&gt; &#123;            await isMetamask()                .then((res: string) =&gt; &#123;                    console.log(res)                    window.ethereum                        .request(&#123;method: &#x27;eth_requestAccounts&#x27;&#125;)                        .then((res: string[]) =&gt; &#123;                            onEvents()                            resolve(res)                        &#125;)                        .catch((res: string[]) =&gt; &#123;                            reject(res)                        &#125;)                &#125;)                .catch((res: string) =&gt; &#123;                    reject(res)                &#125;)        &#125;))    &#125;    function isMetamask(): Promise&lt;string&gt; &#123;        return new Promise((resolve, reject) =&gt; &#123;            if (typeof window.ethereum !== &#x27;undefined&#x27;) &#123;                resolve(&#x27;MetaMask is installed!&#x27;)            &#125; else &#123;                reject(&#x27;MetaMask is uninstalled!&#x27;)            &#125;        &#125;)    &#125;    async function onEvents () &#123;        const user = UserStore()        //  一旦切换账号这里就会执行        window.ethereum.on(&quot;accountsChanged&quot;, function(accounts: string[]) &#123;            if (accounts.length &gt; 0) &#123;                // 账号切换后重新存储钱包地址                user.setWalletAddress(accounts[0])            &#125;        &#125;)    &#125;    return &#123;        getAccount    &#125;&#125;
-账号切换后使用新的钱包地址重新获取页面数据&lt;script setup lang=&quot;ts&quot;&gt;import &#123; UserStore &#125; from &#x27;store/modules/user&#x27;import &#123; computed, watch &#125; from &#x27;vue&#x27;const user = UserStore()defineProps&lt;&#123; msg: string &#125;&gt;()const getAddress = async () =&gt; &#123;  await user.getWallet()&#125;const walletAddress = computed((): string | null =&gt; &#123;  return user.getWalletAddress&#125;)watch( // 监听到用户钱包地址发生变化，重新执行获取钱包余额事件  () =&gt; user.getWalletAddress,  (walletAddress) =&gt; &#123;    walletAddress &amp;&amp; getBalance()  &#125;)&lt;/script&gt;&lt;template&gt;  &lt;ElButton @click=&quot;getAddress&quot; type=&quot;primary&quot;&gt;连接钱包&lt;/ElButton&gt;  &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;  &lt;div&gt;钱包地址：&#123;&#123;walletAddress&#125;&#125;&lt;/div&gt;&lt;/template&gt;&lt;style scoped&gt;&lt;/style&gt;]]></content>
-      <categories>
-        <category>Web3</category>
-      </categories>
-      <tags>
-        <tag>Web3.js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Vite+Vue3+TypeScript轻量级框架搭建(2)</title>
     <url>//826db4a2.html</url>
     <content><![CDATA[unplugin-vue-components - 自动导入、按需导入组件安装
@@ -215,6 +202,19 @@ import &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vi
       </categories>
       <tags>
         <tag>Vite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>web3.js监听用户切换钱包状态</title>
+    <url>//eff061d5.html</url>
+    <content><![CDATA[Web3js获取MetaMask钱包并监听切换官方API方法监听账号切换
+import &#123; UserStore &#125; from &#x27;store/modules/user&#x27;export function useWeb3() &#123;    async function getAccount(): Promise&lt;any&gt; &#123;        return new Promise((async (resolve, reject) =&gt; &#123;            await isMetamask()                .then((res: string) =&gt; &#123;                    console.log(res)                    window.ethereum                        .request(&#123;method: &#x27;eth_requestAccounts&#x27;&#125;)                        .then((res: string[]) =&gt; &#123;                            onEvents()                            resolve(res)                        &#125;)                        .catch((res: string[]) =&gt; &#123;                            reject(res)                        &#125;)                &#125;)                .catch((res: string) =&gt; &#123;                    reject(res)                &#125;)        &#125;))    &#125;    function isMetamask(): Promise&lt;string&gt; &#123;        return new Promise((resolve, reject) =&gt; &#123;            if (typeof window.ethereum !== &#x27;undefined&#x27;) &#123;                resolve(&#x27;MetaMask is installed!&#x27;)            &#125; else &#123;                reject(&#x27;MetaMask is uninstalled!&#x27;)            &#125;        &#125;)    &#125;    async function onEvents () &#123;        const user = UserStore()        //  一旦切换账号这里就会执行        window.ethereum.on(&quot;accountsChanged&quot;, function(accounts: string[]) &#123;            if (accounts.length &gt; 0) &#123;                // 账号切换后重新存储钱包地址                user.setWalletAddress(accounts[0])            &#125;        &#125;)    &#125;    return &#123;        getAccount    &#125;&#125;
+账号切换后使用新的钱包地址重新获取页面数据&lt;script setup lang=&quot;ts&quot;&gt;import &#123; UserStore &#125; from &#x27;store/modules/user&#x27;import &#123; computed, watch &#125; from &#x27;vue&#x27;const user = UserStore()defineProps&lt;&#123; msg: string &#125;&gt;()const getAddress = async () =&gt; &#123;  await user.getWallet()&#125;const walletAddress = computed((): string | null =&gt; &#123;  return user.getWalletAddress&#125;)watch( // 监听到用户钱包地址发生变化，重新执行获取钱包余额事件  () =&gt; user.getWalletAddress,  (walletAddress) =&gt; &#123;    walletAddress &amp;&amp; getBalance()  &#125;)&lt;/script&gt;&lt;template&gt;  &lt;ElButton @click=&quot;getAddress&quot; type=&quot;primary&quot;&gt;连接钱包&lt;/ElButton&gt;  &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;  &lt;div&gt;钱包地址：&#123;&#123;walletAddress&#125;&#125;&lt;/div&gt;&lt;/template&gt;&lt;style scoped&gt;&lt;/style&gt;]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3.js</tag>
       </tags>
   </entry>
   <entry>
@@ -272,20 +272,6 @@ import &#123; defineStore &#125; from &#x27;pinia&#x27;import &#123; useWeb3 &#1
       </tags>
   </entry>
   <entry>
-    <title>安装依赖超时443解决</title>
-    <url>//e973ebbc.html</url>
-    <content><![CDATA[安装依赖的时候有时会遇到安装不上超时等问题
-解决方法使用IPv4的方法连接而不是IPv6更改方式
-注意别把IPv4也给禁用掉，取消勾选IPv6即可
-确认成功后即可正常安装依赖]]></content>
-      <categories>
-        <category>开发工具</category>
-      </categories>
-      <tags>
-        <tag>NPM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>创建UTXO</title>
     <url>//e5a32ca1.html</url>
     <content><![CDATA[BTC创建UTXO并用Joy ID广播安装依赖pnpm install bitcoinjs-lib tiny-secp256k1 axios @joyid/bitcoin
@@ -297,6 +283,20 @@ import &#123; defineStore &#125; from &#x27;pinia&#x27;import &#123; useWeb3 &#1
       </categories>
       <tags>
         <tag>BTC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装依赖超时443解决</title>
+    <url>//e973ebbc.html</url>
+    <content><![CDATA[安装依赖的时候有时会遇到安装不上超时等问题
+解决方法使用IPv4的方法连接而不是IPv6更改方式
+注意别把IPv4也给禁用掉，取消勾选IPv6即可
+确认成功后即可正常安装依赖]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>NPM</tag>
       </tags>
   </entry>
   <entry>
