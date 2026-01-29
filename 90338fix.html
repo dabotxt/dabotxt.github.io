@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>解决iOS分发Non-public API问题 | Big Pineapple</title><meta name="author" content="DB"><meta name="copyright" content="DB"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="问题描述在提交 iOS 应用到 TestFlight 或 App Store 时，遇到以下错误： 1234590338: Non-public API usage. The app references non-public selectors in Chainbox-QA: _isKeyDown, _modifiedInput, _modifierFlags. If method names i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决iOS分发Non-public API问题">
+<meta property="og:url" content="http://example.com/90338fix.html">
+<meta property="og:site_name" content="Big Pineapple">
+<meta property="og:description" content="问题描述在提交 iOS 应用到 TestFlight 或 App Store 时，遇到以下错误： 1234590338: Non-public API usage. The app references non-public selectors in Chainbox-QA: _isKeyDown, _modifiedInput, _modifierFlags. If method names i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/10/OtyPTx.jpg">
+<meta property="article:published_time" content="2026-01-29T02:38:20.000Z">
+<meta property="article:modified_time" content="2026-01-29T02:39:12.411Z">
+<meta property="article:author" content="DB">
+<meta property="article:tag" content="React Native">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2022/05/10/OtyPTx.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "解决iOS分发Non-public API问题",
+  "url": "http://example.com/90338fix.html",
+  "image": "https://s1.ax1x.com/2022/05/10/OtyPTx.jpg",
+  "datePublished": "2026-01-29T02:38:20.000Z",
+  "dateModified": "2026-01-29T02:39:12.411Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "DB",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/90338fix.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '解决iOS分发Non-public API问题',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s1.ax1x.com/2022/05/10/OtyvUP.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Big Pineapple</span></a><a class="nav-page-title" href="/"><span class="site-name">解决iOS分发Non-public API问题</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">解决iOS分发Non-public API问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-29T02:38:20.000Z" title="发表于 2026-01-29 10:38:20">2026-01-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-29T02:39:12.411Z" title="更新于 2026-01-29 10:39:12">2026-01-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在提交 iOS 应用到 TestFlight 或 App Store 时，遇到以下错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">90338: Non-public API usage. The app references non-public selectors in Chainbox-QA: </span><br><span class="line">_isKeyDown, _modifiedInput, _modifierFlags. </span><br><span class="line"></span><br><span class="line">If method names in your source code match the private Apple APIs listed above, </span><br><span class="line">altering your method names will help prevent this app from being flagged in future submissions.</span><br></pre></td></tr></table></figure>
+
+<p>这是因为 React Native 的 <code>RCTKeyCommands.m</code> 和其他文件中使用了 Apple 的私有 API 选择器。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>在 <code>Podfile</code> 中添加 <code>post_install</code> 脚本，自动替换这些私有 API 名称。</p>
+<h4 id="1-首先定义-find-and-replace-函数"><a href="#1-首先定义-find-and-replace-函数" class="headerlink" title="1. 首先定义 find_and_replace 函数"></a>1. 首先定义 <code>find_and_replace</code> 函数</h4><p>在 <code>Podfile</code> 顶部添加：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">find_and_replace</span>(<span class="params">dir, findstr, replacestr</span>)</span><br><span class="line">  <span class="title class_">Dir</span>[dir].each <span class="keyword">do</span> |<span class="params">name</span>|</span><br><span class="line">    text = <span class="title class_">File</span>.read(name)</span><br><span class="line">    replace = text.gsub(findstr, replacestr)</span><br><span class="line">    <span class="keyword">if</span> text != replace</span><br><span class="line">      puts <span class="string">&quot;Fix: &quot;</span> + name</span><br><span class="line">      <span class="title class_">File</span>.open(name, <span class="string">&quot;w&quot;</span>) &#123; |<span class="params">file</span>| file.puts replace &#125;</span><br><span class="line">      <span class="variable constant_">STDOUT</span>.flush</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="title class_">Dir</span>[dir + <span class="string">&#x27;*/&#x27;</span>].each(&amp;method(<span class="symbol">:find_and_replace</span>))</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-在-post-install-中调用替换"><a href="#2-在-post-install-中调用替换" class="headerlink" title="2. 在 post_install 中调用替换"></a>2. 在 <code>post_install</code> 中调用替换</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">post_install <span class="keyword">do</span> |<span class="params">installer</span>|</span><br><span class="line">  <span class="comment"># 替换 RCTKeyCommands.m 中的私有 API</span></span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_modifierFlags&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_modifierEventFlags&quot;</span>)</span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_modifiedInput&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_modifiedEventInput&quot;</span>)</span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_isKeyDown&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_isKeyEventDown&quot;</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 替换 RCTPackagerClient.h 中的私有 API</span></span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/DevSupport/RCTPackagerClient.h&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;handleNotification&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;handlePackageNotification&quot;</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 替换 RCTPackagerConnection.mm 中的私有 API</span></span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/DevSupport/RCTPackagerConnection.mm&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;handleNotification&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;handlePackageNotification&quot;</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 其他 post_install 配置...</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="完整-Podfile-示例"><a href="#完整-Podfile-示例" class="headerlink" title="完整 Podfile 示例"></a>完整 Podfile 示例</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">find_and_replace</span>(<span class="params">dir, findstr, replacestr</span>)</span><br><span class="line">  <span class="title class_">Dir</span>[dir].each <span class="keyword">do</span> |<span class="params">name</span>|</span><br><span class="line">    text = <span class="title class_">File</span>.read(name)</span><br><span class="line">    replace = text.gsub(findstr, replacestr)</span><br><span class="line">    <span class="keyword">if</span> text != replace</span><br><span class="line">      puts <span class="string">&quot;Fix: &quot;</span> + name</span><br><span class="line">      <span class="title class_">File</span>.open(name, <span class="string">&quot;w&quot;</span>) &#123; |<span class="params">file</span>| file.puts replace &#125;</span><br><span class="line">      <span class="variable constant_">STDOUT</span>.flush</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  <span class="title class_">Dir</span>[dir + <span class="string">&#x27;*/&#x27;</span>].each(&amp;method(<span class="symbol">:find_and_replace</span>))</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ... 你的其他 Podfile 配置 ...</span></span><br><span class="line"></span><br><span class="line">post_install <span class="keyword">do</span> |<span class="params">installer</span>|</span><br><span class="line">  <span class="comment"># 修复 Non-public API 问题</span></span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_modifierFlags&quot;</span>, <span class="string">&quot;_modifierEventFlags&quot;</span>)</span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_modifiedInput&quot;</span>, <span class="string">&quot;_modifiedEventInput&quot;</span>)</span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;_isKeyDown&quot;</span>, <span class="string">&quot;_isKeyEventDown&quot;</span>)</span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/DevSupport/RCTPackagerClient.h&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;handleNotification&quot;</span>, <span class="string">&quot;handlePackageNotification&quot;</span>)</span><br><span class="line">  find_and_replace(<span class="string">&quot;./node_modules/react-native/React/DevSupport/RCTPackagerConnection.mm&quot;</span>,</span><br><span class="line">                   <span class="string">&quot;handleNotification&quot;</span>, <span class="string">&quot;handlePackageNotification&quot;</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><ol>
+<li>将上述代码添加到 <code>ios/Podfile</code></li>
+<li>运行 <code>pod install</code></li>
+<li>重新构建并提交到 TestFlight</li>
+</ol>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>每次运行 <code>pod install</code> 时会自动执行替换</li>
+<li>这个修复适用于 debug 模式上传到 TestFlight</li>
+<li>如果更新了 React Native 版本，可能需要调整文件路径</li>
+</ul>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><ul>
+<li><a target="_blank" rel="noopener" href="http://developer.apple.com/support/technical/">Apple Technical Support</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues">React Native GitHub Issues</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">DB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/90338fix.html">http://example.com/90338fix.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Big Pineapple</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/React-Native/">React Native</a></div><div class="post-share"><div class="social-share" data-image="https://s1.ax1x.com/2022/05/10/OtyPTx.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/4a17b158.html" title="微信支付JSAPI前端调起支付"><img class="cover" src="https://s1.ax1x.com/2022/04/28/LOHQrF.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">微信支付JSAPI前端调起支付</div></div><div class="info-2"><div class="info-item-1">在微信浏览器里面打开H5网页中执行JS调起支付。接口输入输出数据格式为JSON。 注意：WeixinJSBridge内置对象在其他浏览器中无效。1、网页端接口请求参数列表12345678&#123;  appid: string, // appId为当前服务商号绑定的appid  timeStamp: string, // 当前的时间  nonceStr: string, // 随机字符串，不长于32位。  package: string, // 统一下单接口返回的prepay_id参数值  signType: string, // 签名类型，默认为MD5，支持HMAC-SHA256和MD5。  paySign: string // 签名&#125;  以上参数皆是必填项统一由后端接口返回参数 2、返回结果值说明123get_brand_wcpay_request:ok // 支付成功get_brand_wcpay_request:cancel // 支付过程中用户取消get_brand_wcpay_request:fail // 支付失败  注：JS API的返回结果get_b...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://s1.ax1x.com/2022/04/29/LvbDbT.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">DB</div><div class="author-info-description">事当决而不决者，愚人也</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://haiyong.site/moyu/shengchengshu.html"><i class="iconfont icon-youxishoubing"></i><span>Just Relax</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center">微信号：***</p> <p align="center">QQ号：***</p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">2.</span> <span class="toc-text">解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%A6%96%E5%85%88%E5%AE%9A%E4%B9%89-find-and-replace-%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">1. 首先定义 find_and_replace 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%9C%A8-post-install-%E4%B8%AD%E8%B0%83%E7%94%A8%E6%9B%BF%E6%8D%A2"><span class="toc-number">2.2.</span> <span class="toc-text">2. 在 post_install 中调用替换</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4-Podfile-%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">完整 Podfile 示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">使用步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="toc-number">6.</span> <span class="toc-text">相关链接</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/90338fix.html" title="解决iOS分发Non-public API问题"><img src="https://s1.ax1x.com/2022/05/10/OtyPTx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解决iOS分发Non-public API问题"/></a><div class="content"><a class="title" href="/90338fix.html" title="解决iOS分发Non-public API问题">解决iOS分发Non-public API问题</a><time datetime="2026-01-29T02:38:20.000Z" title="发表于 2026-01-29 10:38:20">2026-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/4a17b158.html" title="微信支付JSAPI前端调起支付"><img src="https://s1.ax1x.com/2022/04/28/LOHQrF.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微信支付JSAPI前端调起支付"/></a><div class="content"><a class="title" href="/4a17b158.html" title="微信支付JSAPI前端调起支付">微信支付JSAPI前端调起支付</a><time datetime="2026-01-29T02:36:32.261Z" title="发表于 2026-01-29 10:36:32">2026-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/4a17b166.html" title="前端判断当前访问设备类型"><img src="https://s1.ax1x.com/2022/05/05/OeYnqe.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前端判断当前访问设备类型"/></a><div class="content"><a class="title" href="/4a17b166.html" title="前端判断当前访问设备类型">前端判断当前访问设备类型</a><time datetime="2026-01-29T02:36:32.257Z" title="发表于 2026-01-29 10:36:32">2026-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/55bb1443.html" title="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题"><img src="https://s1.ax1x.com/2022/05/05/OeUDJA.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题"/></a><div class="content"><a class="title" href="/55bb1443.html" title="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题">关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题</a><time datetime="2025-01-06T02:48:34.000Z" title="发表于 2025-01-06 10:48:34">2025-01-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/e973ebbc.html" title="安装依赖超时443解决"><img src="/images/npm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="安装依赖超时443解决"/></a><div class="content"><a class="title" href="/e973ebbc.html" title="安装依赖超时443解决">安装依赖超时443解决</a><time datetime="2024-09-13T07:18:32.000Z" title="发表于 2024-09-13 15:18:32">2024-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By DB</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
