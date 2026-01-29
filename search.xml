@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Git推送失败443</title>
+    <url>//3bc3f9fd.html</url>
+    <content><![CDATA[git再推送代码的时候经常会遇到超时或者无法推送等问题本编文章主要解决Failed to connect to github.com port 443 after 21090 ms: Couldn‘t connect to server的问题问题原因：这是由于本机系统代理端口和git端口不一致导致的。解决办法：1.查看自己本机系统代理设置---网络和Internet---代理---地址---端口
+
+2.修改git配置：（其中的7890改为你电脑的端口号）git config --global http.proxy http://127.0.0.1:7890git config --global https.proxy http://127.0.0.1:7890
+3.再次push就可以成功上传。git push origin source
+]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>OKX插件登录BTC</title>
+    <url>//4c3e688d.html</url>
+    <content><![CDATA[由于BTC网络的登录并不像wallet connect EVM网络那样使用现成的包直接可以建立连接器只要你浏览器内部装有OKX插件就可以直接唤起并登录具体方法如下PC端登录方法const connectBTC = () =&gt; &#123;    if (typeof (window as any).okxwallet !== &#x27;undefined&#x27;) &#123;        const res = await (window as any).okxwallet.bitcoin.requestAccounts();    &#125; else &#123;        console.log(&#x27;OKX Wallet is not installed.&#x27;);    &#125;&#125;
+PC发起交易 目前仅支持BTC主网const sendBTC = () =&gt; &#123;    try &#123;        await (window as any).okxwallet.bitcoin.sendBitcoin(            acceptAddress, // 接收地址            6000, // 发送金额 单位：聪            &#123;                feeRate: 10 // 指定费率            &#125;        );    &#125; catch (error) &#123;        console.error(error)    &#125;&#125;
+移动端登录跟PC端登录有显著区别因为移动端浏览器没法装插件钱包需要跳转到OKX的App中再执行登录操作const checkOkxWallet = async () =&gt; &#123;    // 检查是否监听到浏览器插件    if (typeof (window as any).okxwallet !== &#x27;undefined&#x27;) &#123;        try &#123;            const accounts = await (window as any).bitcoin.requestAccounts();        &#125; catch (e) &#123;            console.log(&#x27;connect failed&#x27;, e);        &#125;    &#125; else &#123;        initOKXWallet()    &#125;&#125;;const initOKXWallet = () =&gt; &#123;    // 调转到OKX App的内部浏览器    const encodedUrl = &quot;https://www.okx.com/download?deeplink=&quot; + encodeURIComponent(&quot;okx://wallet/dapp/url?dappUrl=&quot; + encodeURIComponent(location.href));    window.location.href = encodedUrl;&#125;
+移动端OKX使用BTC发送交易    const okxSend = async () =&gt; &#123;    const acceptAddress = &#x27;your btc address&#x27;    try &#123;        const txid = await (window as any).bitcoin.sendBitcoin(            acceptAddress, // 收款地址            6000, // 金额单位：聪            &#123;                feeRate: 10 // 费率            &#125;        );        console.log(txid, &#x27;tx&#x27;);    &#125; catch (error) &#123;        console.log(error);    &#125;&#125;
+总的来说还是身份方便的，省去了构建UTXO的烦恼]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>BTC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Wagmi返回合约完整错误日志</title>
+    <url>//c49bf0df.html</url>
+    <content><![CDATA[使用Wallet Connect + Wagmi 集成EVM登录交易等操作遇到的一些问题使用useWriteContract发起合约交易直接打印错误日志返回的信息不完整官方文档也没有给到完整的Error信息返回处理，搜也搜不到，去wagmi的discord下面找到了用户自己写的一个解析Wagmi的方法如下import &#123; BaseError &#125; from &quot;wagmi&quot;;const &#123; data: hash, isPending, writeContractAsync, isSuccess: hashSuccess &#125; = useWriteContract()const massComputed = () =&gt; &#123;    writeContractAsync(&#123;        address: contractAddress,        abi: abi,        functionName: &#x27;contractFunction&#x27;,        gas: gasLimit    &#125;)        .then((res: any) =&gt; &#123;            console.log(res);        &#125;)        .catch((error: any) =&gt; &#123;            if (error) &#123;                const shortMessage = (error as BaseError)?.shortMessage;                console.log(shortMessage);            &#125;        &#125;)&#125;
+目前react版本的解析方式是这样的vue版本目前没有好的办法，谁让这个框架是老外发明的呢，兼容性做的有点差]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决切换路由因高度不够出现滚动条导致页面抖动</title>
+    <url>//78cea6d8.html</url>
+    <content><![CDATA[现在大多数页面都是采用主题内容水平居中布局，但是，这种布局存在一个问题。现在的浏览器滚动条默认是overflow:auto类型的，也就是说如果内容高度不足一屏，没有滚动条；如果超出才会出现滚动条。滚动条也是占据屏幕尺寸的，从没有滚动条到有滚动条会使页面左右抖动一下。现有三种解决方法：
+让垂直滚动条一直显示body &#123;    overflow-y: scroll;&#125;
+即使内容高度不足一屏也会显示滚动条，比较影响用户体验
+当内容高度超过一屏时，在浏览器左侧同时加上一个滚动条宽的的padding或margin.wrap-outer &#123;    margin-left: calc(100vw - 100%);&#125;
+margin换成padding一样可以生效
+推荐使用兼容写法html &#123;    overflow-x: hidden;    overflow-y: auto;&#125;body &#123;    width: 100vw;    overflow: hidden;&#125;]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>Css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>flex弹性盒子布局最后一行不满时左对齐实现思路</title>
+    <url>//8513d6fd.html</url>
+    <content><![CDATA[只需要在弹性盒子的容器加一个伪类元素，大小就是盒子内容的宽高就可以实现。
+&lt;ul&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;&lt;/ul&gt;
+*&#123;    padding: 0px;    list-style: none;&#125;ul&#123;    width: 1000px;    height: 800px;    border: 1px solid #000;    display: flex;    flex-flow: row wrap;    justify-content: space-between;&#125;li&#123;    width: 300px;    height: 300px;    border: 1px solid #456;&#125;ul::after&#123;    width: 300px;    height: 300px;    content: &#x27;&#x27;;&#125;]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>Css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端判断当前访问设备类型</title>
+    <url>//4a17b166.html</url>
+    <content><![CDATA[在utils目录下创建一个isType文件const ua = window.navigator.userAgent;export const isWap = /Android|iPhone|ios|iPad|iPod|BlackBerry|IEMobile/i.test(ua); // 是否是移动端export const isWeixin = /MicroMessenger/i.test(ua); // 是否是微信浏览器export const isAlipay = /AlipayClient/i.test(ua); // 是否是支付宝浏览器export const isAndroid = /Android/i.test(ua); // 是否安卓设备export const isIOS = /iphone|ios|ipad|ipod/i.test(ua);export const isMainClient = /aijiao100\(newk12/i.test(ua);export const isWeibo = /(weibo).*weibo__([\d.]+)/i.test(ua);export const isQQ = /qq\/([\d.]+)/i.test(ua);export const isQQBrowser = /(qqbrowser)\/([\d.]+)/i.test(ua);export const isQzone = /qzone\/.*_qz_([\d.]+)/i.test(ua);export const isInApp = isWeixin || isAlipay || isWeibo || isQQ || isMainClient;// 安卓 chrome 浏览器，很多 app 都是在 chrome 的 ua 上进行扩展的export const isOriginalChrome = /chrome\/[\d.]+ Mobile Safari\/[\d.]+/i.test(ua) &amp;&amp; isAndroid;// chrome for ios 和 safari 的区别仅仅是将 Version/&lt;VersionNum&gt; 替换成了 CriOS/&lt;ChromeRevision&gt;// ios 上很多 app 都包含 safari 标识，但它们都是以自己的 app 标识开头，而不是 Mozillaexport const isSafari = /safari\/([\d.]+)$/i.test(ua) &amp;&amp; /iphone|ios|ipad|ipod/i.test(ua) &amp;&amp; ua.indexOf(&#x27;Crios&#x27;) &lt; 0 &amp;&amp; ua.indexOf(&#x27;Mozilla&#x27;) === 0;
+使用方法import &#123; isWap &#125; from &#x27;./utils/isType&#x27;;if (isWap) &#123;    console.log(&#x27;当前是移动端&#x27;)&#125; else &#123;    console.log(&#x27;当前是PC端&#x27;)&#125;]]></content>
+      <categories>
+        <category>TypeScript</category>
+      </categories>
+      <tags>
+        <tag>TypeScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>pinia</title>
+    <url>//b51dc851.html</url>
+    <content><![CDATA[Pinia与Vuex的不同Pinia是Vue.js团队开发的一个全新的状态管理库，并且Pinia符合Vuex5的提案，已被纳入官方GitHub。Vuex： State、Gettes、Mutations(同步)、Actions(异步)Pinia： State、Gettes、Actions(同步异步都支持)  
+Pinia的核心特性Pinia没有Mutations、Actions支持同步和异步、没有模块的嵌套结构（每个store互相独立）、更好的TypeScript支持、Vue2和Vue3都支持。
+安装pnpm add pinia
+Pinia初始化设置main.ts文件
+import &#123; createPinia &#125; from &#x27;pinia&#x27;createApp(App).use(createPinia()).mount(&#x27;#app&#x27;)
+在store目录下面新建一个user.ts
+import &#123; defineStore &#125; from &#x27;pinia&#x27;export const userStore = defineStore(&#x27;user&#x27;, &#123;    state: () =&gt; &#123;        return &#123;             count: 1        &#125;    &#125;,    getters: &#123;        getCount() &#123;            return this.count        &#125;    &#125;,    actions: &#123;        doubleCount() &#123;            this.count = this.count * 2        &#125;    &#125;&#125;)
+访问state&lt;script setup lang=&quot;ts&quot;&gt;import &#123; UserStore &#125; from &#x27;../store/user&#x27;import &#123; computed &#125; from &#x27;vue&#x27;const user = UserStore()const count = computed(() =&gt; &#123;  return user.count&#125;)&lt;/script&gt;&lt;template&gt;  &lt;van-button type=&#x27;primary&#x27; @click=&#x27;user.doubleCount&#x27;&gt;Double&lt;/van-button&gt;  &lt;span&gt;&#123;&#123;count&#125;&#125;&lt;/span&gt;&lt;/template&gt;&lt;style&gt;&lt;/style&gt;
+异步actionaction支持async&#x2F;await的语法来支持异步处理的场景。
+import &#123; defineStore &#125; from &#x27;pinia&#x27;export const userStore = defineStore(&#x27;user&#x27;, &#123;    state: () =&gt; &#123;        return &#123;             count: 1        &#125;    &#125;,    getters: &#123;        getCount() &#123;            return this.count        &#125;    &#125;,    actions: &#123;        doubleCount() &#123;            this.count = this.count * 2        &#125;,        async login(account, passWord) &#123;            const &#123; data &#125; = await api.login(account, passWord)            return data        &#125;    &#125;&#125;)]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Pinia</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>router</title>
+    <url>//45d2f225.html</url>
+    <content><![CDATA[vite现在创建的vue项目已经默认为vue3了，但是在引入vue-router时，可能会有vue-router报错问题，一直提示createRouter为undefined或者其他的关于vue-router报错的问题，主要原始是vue-router版本问题，直接升级到最新版本即可：
+pnpm add vue-router@next
+项目配置创建router目录新建index.ts
+import &#123; createRouter, createWebHistory, RouteRecordRaw &#125; from &#x27;vue-router&#x27;const routes: Array&lt;RouteRecordRaw&gt; = [    &#123;        path: &#x27;/&#x27;,        name: &#x27;Home&#x27;,        component: () =&gt; import(&#x27;../views/page1.vue&#x27;),        meta: &#123;            title: &#x27;Home&#x27;        &#125;    &#125;,    &#123;        path: &#x27;/page2&#x27;,        name: &#x27;Page2&#x27;,        component: () =&gt; import(&#x27;../views/page2.vue&#x27;),        meta: &#123;            title: &#x27;Page2&#x27;        &#125;    &#125;]const router = createRouter(&#123;    history: createWebHistory(),    routes&#125;)export default router
+main.ts文件配置import &#123; createApp &#125; from &#x27;vue&#x27;import App from &#x27;./App.vue&#x27;import router from &#x27;./router&#x27;import &#123; setupStore &#125; from &#x27;./store&#x27;async function bootStrap() &#123;  const app = createApp(App)  setupStore(app)  app.use(router).mount(&#x27;#app&#x27;)&#125;bootStrap()
+路由守卫配置router目录下创建guard.ts
+import &#123; Router &#125; from &#x27;vue-router&#x27;export const setupRouterGuard = (router: Router) =&gt; &#123;  router.beforeEach((to, from, next) =&gt; &#123;    // @ts-ignore    document.title = to.meta.title // 路由对应的网页标签title    next()  &#125;)&#125;
+router目录下的index.ts文件配置
+import &#123; createRouter, createWebHistory, RouteRecordRaw &#125; from &#x27;vue-router&#x27;import &#123; setupRouterGuard &#125; from &#x27;./guard&#x27;const routes: Array&lt;RouteRecordRaw&gt; = [  &#123;    path: &#x27;/&#x27;,    name: &#x27;Home&#x27;,    component: () =&gt; import(&#x27;../views/page1.vue&#x27;),    meta: &#123;      title: &#x27;Home&#x27;    &#125;  &#125;,  &#123;    path: &#x27;/page2&#x27;,    name: &#x27;Page2&#x27;,    component: () =&gt; import(&#x27;../views/page2.vue&#x27;),    meta: &#123;      title: &#x27;Page2&#x27;    &#125;  &#125;]const router = createRouter(&#123;  history: createWebHistory(),  routes&#125;)setupRouterGuard(router)export default router]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ts实现康威生命游戏</title>
+    <url>//8cc9b930.html</url>
+    <content><![CDATA[生命游戏中，对于任意细胞，规则如下：
+每个细胞有两种状态 - 存活或死亡，每个细胞与以自身为中心的周围八格细胞产生互动（如图，黑色为存活，白色为死亡）
+当前细胞为存活状态时，当周围的存活细胞低于2个时（不包含2个），该细胞变成死亡状态。（模拟生命数量稀少）
+当前细胞为存活状态时，当周围有2个或3个存活细胞时，该细胞保持原样。
+当前细胞为存活状态时，当周围有超过3个存活细胞时，该细胞变成死亡状态。（模拟生命数量过多）
+当前细胞为死亡状态时，当周围有3个存活细胞时，该细胞变成存活状态。（模拟繁殖）
+可以把最初的细胞结构定义为种子，当所有在种子中的细胞同时被以上规则处理后，可以得到第一代细胞图。按规则继续处理当前的细胞图，可以得到下一代的细胞图，周而复始。
+
+export class GameOfLife &#123;    private activeCells: Array&lt;[number, number]&gt;;    constructor() &#123;        this.activeCells = []; // 初始化矩阵    &#125;    addCell(x: number, y: number): void &#123; // 添加活细胞亮点        this.activeCells.push([x, y]);    &#125;    removeCell(x: number, y: number): void &#123; // 删除活细胞亮点        this.activeCells = this.activeCells.filter(([cx, cy]) =&gt; cx !== x || cy !== y);    &#125;    isActive(x: number, y: number): boolean &#123; // 验证该位置是否有存活的细胞        return this.activeCells.some(([cx, cy]) =&gt; cx === x &amp;&amp; cy === y);    &#125;    private getNeighbors(x: number, y: number): Array&lt;[number, number]&gt; &#123;        const neighbors: Array&lt;[number, number]&gt; = [];        for (let dx = -1; dx &lt;= 1; dx++) &#123;            for (let dy = -1; dy &lt;= 1; dy++) &#123;                if (dx === 0 &amp;&amp; dy === 0) continue;                neighbors.push([x + dx, y + dy]);            &#125;        &#125;        return neighbors;    &#125;    private countActiveNeighbors(x: number, y: number): number &#123;        return this.getNeighbors(x, y).reduce(            (count, [nx, ny]) =&gt; count + (this.isActive(nx, ny) ? 1 : 0),            0        );    &#125;    step(): void &#123; // 执行一次规则        const toEvaluate = new Set&lt;string&gt;();        const nextState: Array&lt;[number, number]&gt; = [];        this.activeCells.forEach(([x, y]) =&gt; &#123;            toEvaluate.add(`$&#123;x&#125;,$&#123;y&#125;`);            this.getNeighbors(x, y).forEach(([nx, ny]) =&gt; &#123;                toEvaluate.add(`$&#123;nx&#125;,$&#123;ny&#125;`);            &#125;);        &#125;);        toEvaluate.forEach((cell: string) =&gt; &#123;            const [x, y] = cell.split(&quot;,&quot;).map(Number);            const isActive = this.isActive(x, y);            const activeNeighbors = this.countActiveNeighbors(x, y);            if (                (isActive &amp;&amp; (activeNeighbors === 2 || activeNeighbors === 3)) ||                (!isActive &amp;&amp; activeNeighbors === 3)            ) &#123;                nextState.push([x, y]);            &#125;        &#125;);        this.activeCells = nextState;    &#125;&#125;]]></content>
+      <categories>
+        <category>TypeScript</category>
+      </categories>
+      <tags>
+        <tag>TypeScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vite+Vue3+TypeScript轻量级框架搭建(1)</title>
+    <url>//5e9df9d6.html</url>
+    <content><![CDATA[初始化项目qnpm init vite@latest√ Project name: vite+vue3+ts  // 项目名字√ Select a framework: » vue  // 框架语言√ Select a variant: » vue-ts  // 拓展语言
+添加setup name增强插件安装
+pnpm install vite-plugin-vue-setup-extend -D
+配置
+import &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vitejs/plugin-vue&#x27;import vueSetupExtend from &#x27;vite-plugin-vue-setup-extend&#x27;// https://vitejs.dev/config/export default defineConfig(&#123;  plugins: [vue(), vueSetupExtend()]&#125;)
+使用
+&lt;script setup name=&#x27;abc&#x27;&gt;&lt;/script&gt;
+为打包后的文件提供传统浏览器兼容性支持因为vite不提供传统浏览器兼容,如果有需要请添加此插件
+pnpm install @vitejs/plugin-legacy -D
+配置
+import &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vitejs/plugin-vue&#x27;import vueSetupExtend from &#x27;vite-plugin-vue-setup-extend&#x27;import legacy from &#x27;@vitejs/plugin-legacy&#x27;// https://vitejs.dev/config/export default defineConfig(&#123;  plugins: [      vue(),    vueSetupExtend(),    legacy(&#123;      targets: [&#x27;defaults&#x27;, &#x27;not IE 11&#x27;],      additionalLegacyPolyfills: [&#x27;regenerator-runtime/runtime&#x27;]    &#125;)  ]&#125;)
+vite-plugin-compression 压缩插件支持gzip等多种压缩算法
+pnpm install vite-plugin-compression -D
+配置
+import &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vitejs/plugin-vue&#x27;import vueSetupExtend from &#x27;vite-plugin-vue-setup-extend&#x27;import legacy from &#x27;@vitejs/plugin-legacy&#x27;import compressPlugin from &#x27;vite-plugin-compression&#x27;// https://vitejs.dev/config/export default defineConfig(&#123;  plugins: [      vue(),    vueSetupExtend(),    legacy(&#123;      targets: [&#x27;defaults&#x27;, &#x27;not IE 11&#x27;],      additionalLegacyPolyfills: [&#x27;regenerator-runtime/runtime&#x27;]    &#125;),    compressPlugin(&#123;      verbose: false, // 是否在控制台输出压缩结果      disable: false, // 是否禁用      threshold: 10240, // 文件容量大于这个值进行压缩，它将被压缩，单位为b      algorithm: &#x27;gzip&#x27;, // 压缩算法 可选 [&#x27;gzip&#x27;,&#x27;brotliCompress&#x27; ,&#x27;deflate&#x27;,&#x27;deflateRaw&#x27;]      ext: &#x27;.gz&#x27;, // 生成的压缩包后缀    &#125;)  ]&#125;)
+vite-plugin-imagemin 图片压缩安装
+pnpm install vite-plugin-imagemin -D
+配置
+import &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vitejs/plugin-vue&#x27;import vueSetupExtend from &#x27;vite-plugin-vue-setup-extend&#x27;import legacy from &#x27;@vitejs/plugin-legacy&#x27;import compressPlugin from &#x27;vite-plugin-compression&#x27;import viteImagemin from &#x27;vite-plugin-imagemin&#x27;// https://vitejs.dev/config/export default defineConfig(&#123;  plugins: [      vue(),    vueSetupExtend(),    legacy(&#123;      targets: [&#x27;defaults&#x27;, &#x27;not IE 11&#x27;],      additionalLegacyPolyfills: [&#x27;regenerator-runtime/runtime&#x27;]    &#125;),    compressPlugin(&#123;      verbose: false, // 是否在控制台输出压缩结果      disable: false, // 是否禁用      threshold: 10240, // 文件容量大于这个值进行压缩，它将被压缩，单位为b      algorithm: &#x27;gzip&#x27;, // 压缩算法 可选 [&#x27;gzip&#x27;,&#x27;brotliCompress&#x27; ,&#x27;deflate&#x27;,&#x27;deflateRaw&#x27;]      ext: &#x27;.gz&#x27;, // 生成的压缩包后缀    &#125;),    viteImagemin(&#123;      gifsicle: &#123;        optimizationLevel: 7,        interlaced: false,      &#125;,      optipng: &#123;        optimizationLevel: 7,      &#125;,      mozjpeg: &#123;        quality: 20,      &#125;,      pngquant: &#123;        quality: [0.8, 0.9],        speed: 4,      &#125;,      svgo: &#123;        plugins: [          &#123;            name: &#x27;removeViewBox&#x27;,          &#125;,          &#123;            name: &#x27;removeEmptyAttrs&#x27;,            active: false          &#125;        ]      &#125;    &#125;)  ]&#125;)]]></content>
+      <categories>
+        <category>Vite</category>
+      </categories>
+      <tags>
+        <tag>Vite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>web3.js监听用户切换钱包状态</title>
+    <url>//eff061d5.html</url>
+    <content><![CDATA[Web3js获取MetaMask钱包并监听切换官方API方法监听账号切换
+import &#123; UserStore &#125; from &#x27;store/modules/user&#x27;export function useWeb3() &#123;    async function getAccount(): Promise&lt;any&gt; &#123;        return new Promise((async (resolve, reject) =&gt; &#123;            await isMetamask()                .then((res: string) =&gt; &#123;                    console.log(res)                    window.ethereum                        .request(&#123;method: &#x27;eth_requestAccounts&#x27;&#125;)                        .then((res: string[]) =&gt; &#123;                            onEvents()                            resolve(res)                        &#125;)                        .catch((res: string[]) =&gt; &#123;                            reject(res)                        &#125;)                &#125;)                .catch((res: string) =&gt; &#123;                    reject(res)                &#125;)        &#125;))    &#125;    function isMetamask(): Promise&lt;string&gt; &#123;        return new Promise((resolve, reject) =&gt; &#123;            if (typeof window.ethereum !== &#x27;undefined&#x27;) &#123;                resolve(&#x27;MetaMask is installed!&#x27;)            &#125; else &#123;                reject(&#x27;MetaMask is uninstalled!&#x27;)            &#125;        &#125;)    &#125;    async function onEvents () &#123;        const user = UserStore()        //  一旦切换账号这里就会执行        window.ethereum.on(&quot;accountsChanged&quot;, function(accounts: string[]) &#123;            if (accounts.length &gt; 0) &#123;                // 账号切换后重新存储钱包地址                user.setWalletAddress(accounts[0])            &#125;        &#125;)    &#125;    return &#123;        getAccount    &#125;&#125;
+账号切换后使用新的钱包地址重新获取页面数据&lt;script setup lang=&quot;ts&quot;&gt;import &#123; UserStore &#125; from &#x27;store/modules/user&#x27;import &#123; computed, watch &#125; from &#x27;vue&#x27;const user = UserStore()defineProps&lt;&#123; msg: string &#125;&gt;()const getAddress = async () =&gt; &#123;  await user.getWallet()&#125;const walletAddress = computed((): string | null =&gt; &#123;  return user.getWalletAddress&#125;)watch( // 监听到用户钱包地址发生变化，重新执行获取钱包余额事件  () =&gt; user.getWalletAddress,  (walletAddress) =&gt; &#123;    walletAddress &amp;&amp; getBalance()  &#125;)&lt;/script&gt;&lt;template&gt;  &lt;ElButton @click=&quot;getAddress&quot; type=&quot;primary&quot;&gt;连接钱包&lt;/ElButton&gt;  &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;  &lt;div&gt;钱包地址：&#123;&#123;walletAddress&#125;&#125;&lt;/div&gt;&lt;/template&gt;&lt;style scoped&gt;&lt;/style&gt;]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vite+Vue3+TypeScript轻量级框架搭建(2)</title>
+    <url>//826db4a2.html</url>
+    <content><![CDATA[unplugin-vue-components - 自动导入、按需导入组件安装
+pnpm install unplugin-vue-components -D
+配置
+// vite.config.tsimport &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vitejs/plugin-vue&#x27;import vueSetupExtend from &#x27;vite-plugin-vue-setup-extend&#x27;import legacy from &#x27;@vitejs/plugin-legacy&#x27;import compressPlugin from &#x27;vite-plugin-compression&#x27;import viteImagemin from &#x27;vite-plugin-imagemin&#x27;import Components from &#x27;unplugin-vue-components/vite&#x27;import &#123; ElementPlusResolver &#125; from &#x27;unplugin-vue-components/resolvers&#x27;// https://vitejs.dev/config/export default defineConfig(&#123;  plugins: [    vue(),    ...省略插件配置,    Components(&#123;      dirs: [&#x27;src/components&#x27;],      resolvers: [ElementPlusResolver()],      // 组件的有效文件扩展名。      extensions: [&#x27;vue&#x27;],      // 允许子目录作为组件的命名空间前缀。      directoryAsNamespace: false,      deep: true,    &#125;)  ]&#125;)
+现在已经注释掉HelloWorld组件引入,项目仍正常运行
+&lt;script setup lang=&quot;ts&quot; name=&quot;App&quot;&gt;// This starter template is using Vue 3 &lt;script setup&gt; SFCs// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup// import HelloWorld from &#x27;./components/HelloWorld.vue&#x27;&lt;/script&gt;&lt;template&gt;  &lt;img alt=&quot;Vue logo&quot; src=&quot;./assets/logo.png&quot; /&gt;  &lt;HelloWorld msg=&quot;Hello Vue 3 + TypeScript + Vite&quot; /&gt;&lt;/template&gt;&lt;style&gt;&lt;/style&gt;
+运行或打包会自动生成components.d.ts文件内容如下：
+// generated by unplugin-vue-components// We suggest you to commit this file into source control// Read more: https://github.com/vuejs/vue-next/pull/3399import &#x27;@vue/runtime-core&#x27;declare module &#x27;@vue/runtime-core&#x27; &#123;  export interface GlobalComponents &#123;    HelloWorld: typeof import(&#x27;./src/components/HelloWorld.vue&#x27;)[&#x27;default&#x27;]  &#125;&#125;export &#123;&#125;
+安装Vant UI 组件库安装
+pnpm add vant
+vite-plugin-style-import - 按需引入组件库样式安装
+pnpm install vite-plugin-style-import consola -D
+配置
+import &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vitejs/plugin-vue&#x27;import vueSetupExtend from &#x27;vite-plugin-vue-setup-extend&#x27;import legacy from &#x27;@vitejs/plugin-legacy&#x27;import compressPlugin from &#x27;vite-plugin-compression&#x27;import viteImagemin from &#x27;vite-plugin-imagemin&#x27;import Components from &#x27;unplugin-vue-components/vite&#x27;import &#123; VantResolver &#125; from &#x27;unplugin-vue-components/resolvers&#x27;import &#123; createStyleImportPlugin, VantResolve &#125; from &#x27;vite-plugin-style-import&#x27;// https://vitejs.dev/config/export default defineConfig(&#123;  plugins: [      vue(),    vueSetupExtend(),    legacy(&#123;      targets: [&#x27;defaults&#x27;, &#x27;not IE 11&#x27;],      additionalLegacyPolyfills: [&#x27;regenerator-runtime/runtime&#x27;]    &#125;),    compressPlugin(&#123;      verbose: false, // 是否在控制台输出压缩结果      disable: false, // 是否禁用      threshold: 10240, // 文件容量大于这个值进行压缩，它将被压缩，单位为b      algorithm: &#x27;gzip&#x27;, // 压缩算法 可选 [&#x27;gzip&#x27;,&#x27;brotliCompress&#x27; ,&#x27;deflate&#x27;,&#x27;deflateRaw&#x27;]      ext: &#x27;.gz&#x27;, // 生成的压缩包后缀    &#125;),    viteImagemin(&#123;      gifsicle: &#123;        optimizationLevel: 7,        interlaced: false,      &#125;,      optipng: &#123;        optimizationLevel: 7,      &#125;,      mozjpeg: &#123;        quality: 20,      &#125;,      pngquant: &#123;        quality: [0.8, 0.9],        speed: 4,      &#125;,      svgo: &#123;        plugins: [          &#123;            name: &#x27;removeViewBox&#x27;,          &#125;,          &#123;            name: &#x27;removeEmptyAttrs&#x27;,            active: false          &#125;        ]      &#125;    &#125;),    Components(&#123;      dirs: [&#x27;src/components&#x27;],      resolvers: [VantResolver()],      // 组件的有效文件扩展名。      extensions: [&#x27;vue&#x27;],      // 允许子目录作为组件的命名空间前缀。      directoryAsNamespace: false,      deep: true,    &#125;),    createStyleImportPlugin(&#123; resolves: [VantResolve()] &#125;),  ]&#125;)
+使用vant组件不用手动引入,unplugin-vue-components 按需自动导入组件
+&lt;van-button type=&quot;primary&quot;&gt;主要按钮&lt;/van-button&gt;
+unplugin-auto-import - API自动导入setup语法让我们不用再一个一个的把变量和方法都return出去就能在模板上使用，大大的解放了我们的双手。然而对于一些常用的VueAPI，比如ref、computed、watch等，还是每次都需要我们在页面上手动进行import { ref } from ‘vue’。可以通过unplugin-auto-import实现自动导入，无需import即可在文件里使用Vue的API。
+pnpm install unplugin-auto-import -D
+配置
+import &#123; defineConfig &#125; from &#x27;vite&#x27;import vue from &#x27;@vitejs/plugin-vue&#x27;import vueSetupExtend from &#x27;vite-plugin-vue-setup-extend&#x27;import legacy from &#x27;@vitejs/plugin-legacy&#x27;import compressPlugin from &#x27;vite-plugin-compression&#x27;import viteImagemin from &#x27;vite-plugin-imagemin&#x27;import Components from &#x27;unplugin-vue-components/vite&#x27;import &#123; VantResolver &#125; from &#x27;unplugin-vue-components/resolvers&#x27;import &#123; createStyleImportPlugin, VantResolve &#125; from &#x27;vite-plugin-style-import&#x27;import AutoImport from &#x27;unplugin-auto-import/vite&#x27;// https://vitejs.dev/config/export default defineConfig(&#123;  plugins: [      vue(),    vueSetupExtend(),    legacy(&#123;      targets: [&#x27;defaults&#x27;, &#x27;not IE 11&#x27;],      additionalLegacyPolyfills: [&#x27;regenerator-runtime/runtime&#x27;]    &#125;),    compressPlugin(&#123;      verbose: false, // 是否在控制台输出压缩结果      disable: false, // 是否禁用      threshold: 10240, // 文件容量大于这个值进行压缩，它将被压缩，单位为b      algorithm: &#x27;gzip&#x27;, // 压缩算法 可选 [&#x27;gzip&#x27;,&#x27;brotliCompress&#x27; ,&#x27;deflate&#x27;,&#x27;deflateRaw&#x27;]      ext: &#x27;.gz&#x27;, // 生成的压缩包后缀    &#125;),    viteImagemin(&#123;      gifsicle: &#123;        optimizationLevel: 7,        interlaced: false,      &#125;,      optipng: &#123;        optimizationLevel: 7,      &#125;,      mozjpeg: &#123;        quality: 20,      &#125;,      pngquant: &#123;        quality: [0.8, 0.9],        speed: 4,      &#125;,      svgo: &#123;        plugins: [          &#123;            name: &#x27;removeViewBox&#x27;,          &#125;,          &#123;            name: &#x27;removeEmptyAttrs&#x27;,            active: false          &#125;        ]      &#125;    &#125;),    Components(&#123;      dirs: [&#x27;src/components&#x27;],      resolvers: [VantResolver()],      // 组件的有效文件扩展名。      extensions: [&#x27;vue&#x27;],      // 允许子目录作为组件的命名空间前缀。      directoryAsNamespace: false,      deep: true,    &#125;),    createStyleImportPlugin(&#123; resolves: [VantResolve()] &#125;),    AutoImport(&#123;      imports: [&#x27;vue&#x27;],      resolvers: [VantResolver(&#123; importStyle: false &#125;)]    &#125;)  ]&#125;)
+使用
+&lt;script setup lang=&quot;ts&quot;&gt;const count = ref(0)const state = reactive(&#123;  data: &#x27;321&#x27;&#125;)const &#123; data &#125; = toRefs(state)&lt;/script&gt;&lt;template&gt;  &#123;&#123;count&#125;&#125;  &#123;&#123;data&#125;&#125;&lt;/template&gt;&lt;style scoped&gt;&lt;/style&gt;
+运行或打包会自动生成auto-imports.d.ts文件内容如下：
+// Generated by &#x27;unplugin-auto-import&#x27;// We suggest you to commit this file into source controldeclare global &#123;  const computed: typeof import(&#x27;vue&#x27;)[&#x27;computed&#x27;]  const createApp: typeof import(&#x27;vue&#x27;)[&#x27;createApp&#x27;]  const customRef: typeof import(&#x27;vue&#x27;)[&#x27;customRef&#x27;]  const defineAsyncComponent: typeof import(&#x27;vue&#x27;)[&#x27;defineAsyncComponent&#x27;]  const defineComponent: typeof import(&#x27;vue&#x27;)[&#x27;defineComponent&#x27;]  const effectScope: typeof import(&#x27;vue&#x27;)[&#x27;effectScope&#x27;]  const EffectScope: typeof import(&#x27;vue&#x27;)[&#x27;EffectScope&#x27;]  const getCurrentInstance: typeof import(&#x27;vue&#x27;)[&#x27;getCurrentInstance&#x27;]  const getCurrentScope: typeof import(&#x27;vue&#x27;)[&#x27;getCurrentScope&#x27;]  const h: typeof import(&#x27;vue&#x27;)[&#x27;h&#x27;]  const inject: typeof import(&#x27;vue&#x27;)[&#x27;inject&#x27;]  const isReadonly: typeof import(&#x27;vue&#x27;)[&#x27;isReadonly&#x27;]  const isRef: typeof import(&#x27;vue&#x27;)[&#x27;isRef&#x27;]  const markRaw: typeof import(&#x27;vue&#x27;)[&#x27;markRaw&#x27;]  const nextTick: typeof import(&#x27;vue&#x27;)[&#x27;nextTick&#x27;]  const onActivated: typeof import(&#x27;vue&#x27;)[&#x27;onActivated&#x27;]  const onBeforeMount: typeof import(&#x27;vue&#x27;)[&#x27;onBeforeMount&#x27;]  const onBeforeUnmount: typeof import(&#x27;vue&#x27;)[&#x27;onBeforeUnmount&#x27;]  const onBeforeUpdate: typeof import(&#x27;vue&#x27;)[&#x27;onBeforeUpdate&#x27;]  const onDeactivated: typeof import(&#x27;vue&#x27;)[&#x27;onDeactivated&#x27;]  const onErrorCaptured: typeof import(&#x27;vue&#x27;)[&#x27;onErrorCaptured&#x27;]  const onMounted: typeof import(&#x27;vue&#x27;)[&#x27;onMounted&#x27;]  const onRenderTracked: typeof import(&#x27;vue&#x27;)[&#x27;onRenderTracked&#x27;]  const onRenderTriggered: typeof import(&#x27;vue&#x27;)[&#x27;onRenderTriggered&#x27;]  const onScopeDispose: typeof import(&#x27;vue&#x27;)[&#x27;onScopeDispose&#x27;]  const onServerPrefetch: typeof import(&#x27;vue&#x27;)[&#x27;onServerPrefetch&#x27;]  const onUnmounted: typeof import(&#x27;vue&#x27;)[&#x27;onUnmounted&#x27;]  const onUpdated: typeof import(&#x27;vue&#x27;)[&#x27;onUpdated&#x27;]  const provide: typeof import(&#x27;vue&#x27;)[&#x27;provide&#x27;]  const reactive: typeof import(&#x27;vue&#x27;)[&#x27;reactive&#x27;]  const readonly: typeof import(&#x27;vue&#x27;)[&#x27;readonly&#x27;]  const ref: typeof import(&#x27;vue&#x27;)[&#x27;ref&#x27;]  const resolveComponent: typeof import(&#x27;vue&#x27;)[&#x27;resolveComponent&#x27;]  const shallowReactive: typeof import(&#x27;vue&#x27;)[&#x27;shallowReactive&#x27;]  const shallowReadonly: typeof import(&#x27;vue&#x27;)[&#x27;shallowReadonly&#x27;]  const shallowRef: typeof import(&#x27;vue&#x27;)[&#x27;shallowRef&#x27;]  const toRaw: typeof import(&#x27;vue&#x27;)[&#x27;toRaw&#x27;]  const toRef: typeof import(&#x27;vue&#x27;)[&#x27;toRef&#x27;]  const toRefs: typeof import(&#x27;vue&#x27;)[&#x27;toRefs&#x27;]  const triggerRef: typeof import(&#x27;vue&#x27;)[&#x27;triggerRef&#x27;]  const unref: typeof import(&#x27;vue&#x27;)[&#x27;unref&#x27;]  const useAttrs: typeof import(&#x27;vue&#x27;)[&#x27;useAttrs&#x27;]  const useCssModule: typeof import(&#x27;vue&#x27;)[&#x27;useCssModule&#x27;]  const useCssVars: typeof import(&#x27;vue&#x27;)[&#x27;useCssVars&#x27;]  const useSlots: typeof import(&#x27;vue&#x27;)[&#x27;useSlots&#x27;]  const watch: typeof import(&#x27;vue&#x27;)[&#x27;watch&#x27;]  const watchEffect: typeof import(&#x27;vue&#x27;)[&#x27;watchEffect&#x27;]&#125;export &#123;&#125;]]></content>
+      <categories>
+        <category>Vite</category>
+      </categories>
+      <tags>
+        <tag>Vite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web3.js安装使用方法</title>
+    <url>//71ab26c1.html</url>
+    <content><![CDATA[web3.js 库是一系列模块的集合，服务于以太坊生态系统的各个功能，如：web3-eth 用来与以太坊区块链及合约的交互web3-shh Whisper 协议相关，进行p2p通信和广播web3-bzz swarm 协议（去中心化文件存储）相关web3-utils 包含一些对 DApp 开发者有用的方法  
+引入web3.jspnpm add web3
+项目构建web3文件在utils目录下新建useWeb3.ts
+import &#123; UserStore &#125; from &#x27;store/modules/user&#x27;export function useWeb3() &#123;    // 获取钱包地址    async function getAccount(): Promise&lt;any&gt; &#123;        return new Promise((async (resolve, reject) =&gt; &#123;            await isMetamask()                .then((res: string) =&gt; &#123;                    // 获取钱包地址授权                    window.ethereum.request(&#123;method: &#x27;eth_requestAccounts&#x27;&#125;)                        .then((res: string[]) =&gt; &#123;                            resolve(res)                        &#125;)                        .catch((res: string[]) =&gt; &#123;                            reject(res)                        &#125;)                &#125;)                .catch((res: string) =&gt; &#123;                    reject(res)                &#125;)        &#125;))    &#125;    function isMetamask(): Promise&lt;string&gt; &#123;        return new Promise((resolve, reject) =&gt; &#123;            // 这一步骤是判断当前访问浏览器是否安装MetaMask            if (typeof window.ethereum !== &#x27;undefined&#x27;) &#123;                resolve(&#x27;MetaMask is installed!&#x27;)            &#125; else &#123;                reject(&#x27;MetaMask is uninstalled!&#x27;)            &#125;        &#125;)    &#125;    return &#123;        getAccount    &#125;&#125;
+配合store使用，将钱包地址存储到store里面并显示出来store.ts文件
+import &#123; defineStore &#125; from &#x27;pinia&#x27;import &#123; useWeb3 &#125; from &#x27;src/utils/useWeb3&#x27;import &#123; store &#125; from &#x27;../index&#x27;interface UserState &#123;  walletAddress: string | null&#125;export const useUserStore = defineStore(&#123;  id: &#x27;app-user&#x27;,  state: (): UserState =&gt; (&#123;    walletAddress: null  &#125;),  getters: &#123;    getWalletAddress(): string | null &#123;        // 将store里存储的钱包地址Return出去      return this.walletAddress    &#125;  &#125;,  actions: &#123;    setWalletAddress(walletAddress: any | null) &#123;        // 获取钱包地址后存储到store里面      this.walletAddress = walletAddress    &#125;,    async getWallet () &#123;        // 获取小狐狸授权，并获取钱包地址      const &#123; getAccount &#125; = useWeb3()      const account = await getAccount()      this.setWalletAddress(account[0])    &#125;  &#125;&#125;)export function UserStore() &#123;  return useUserStore(store)&#125;
+项目文件使用方法&lt;script setup lang=&quot;ts&quot;&gt;import &#123; UserStore &#125; from &#x27;store/modules/user&#x27;import &#123; computed &#125; from &#x27;vue&#x27;const user = UserStore()const getAddress = async () =&gt; &#123;  await user.getWallet()&#125;const walletAddress = computed((): string | null =&gt; &#123;  return user.getWalletAddress&#125;)&lt;/script&gt;&lt;template&gt;  &lt;ElButton @click=&quot;getAddress&quot; type=&quot;primary&quot;&gt;连接钱包&lt;/ElButton&gt;  &lt;div&gt;钱包地址：&#123;&#123;walletAddress&#125;&#125;&lt;/div&gt;&lt;/template&gt;&lt;style scoped&gt;&lt;/style&gt;]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>Web3.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微信支付JSAPI前端调起支付</title>
+    <url>//4a17b158.html</url>
+    <content><![CDATA[在微信浏览器里面打开H5网页中执行JS调起支付。接口输入输出数据格式为JSON。
+注意：WeixinJSBridge内置对象在其他浏览器中无效。1、网页端接口请求参数列表&#123;  appid: string, // appId为当前服务商号绑定的appid  timeStamp: string, // 当前的时间  nonceStr: string, // 随机字符串，不长于32位。  package: string, // 统一下单接口返回的prepay_id参数值  signType: string, // 签名类型，默认为MD5，支持HMAC-SHA256和MD5。  paySign: string // 签名&#125;
+
+以上参数皆是必填项统一由后端接口返回参数
+2、返回结果值说明get_brand_wcpay_request:ok // 支付成功get_brand_wcpay_request:cancel // 支付过程中用户取消get_brand_wcpay_request:fail // 支付失败
+
+注：JS API的返回结果get_brand_wcpay_request:ok仅在用户成功完成支付时返回。由于前端交互复杂，get_brand_wcpay_request:cancel或者get_brand_wcpay_request:fail可以统一处理为用户遇到错误或者主动放弃，不必细化区分。
+3、前端封装方法declare let WeixinJSBridge: any;/** * @description: 通过JSAPI下单API成功获取预支付交易会话标识（prepay_id）后，需要通过JSAPI调起支付API来调起微信支付收银台 * 注1：WeixinJSBridge内置对象在其他浏览器中无效 * 注2：此API需要将请求参数进行签名（参与签名的参数为：appId、timeStamp、nonceStr、package，参数区分大小写） * @param &#123;*&#125; * @return &#123;*&#125; */function onBridgeReady (res: any)&#123;  /* eslint-disable-next-line */  WeixinJSBridge.invoke(&#x27;getBrandWCPayRequest&#x27;, &#123;      // 公众号ID，由商户传入      &#x27;appId&#x27;: res.appId,      // 时间戳（转为String类型，兼容IOS “未传timeStamp”问题）      &#x27;timeStamp&#x27;: String(res.timeStamp),      // 随机串      &#x27;nonceStr&#x27;: res.nonceStr,      // 预支付交易会话标识      &#x27;package&#x27;: res.package,      // 微信签名方式      &#x27;signType&#x27;: res.signType,      // 微信签名      &#x27;paySign&#x27;: res.paySign    &#125;,    function (result: any)    &#123;      // 微信团队郑重提示：res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。      // 支付成功      if (result.err_msg === &#x27;get_brand_wcpay_request:ok&#x27;)      &#123;        console.log(&#x27;支付成功&#x27;);      &#125;      // 支付取消      if (result.err_msg === &#x27;get_brand_wcpay_request:cancel&#x27;)      &#123;        console.log(&#x27;支付取消&#x27;);      &#125;      // 支付失败      if (result.err_msg === &#x27;get_brand_wcpay_request:fail&#x27;)      &#123;        console.log(&#x27;支付失败&#x27;);      &#125;    &#125;)&#125;/** * @description: 调起微信JSAPI支付 * @param &#123;*&#125; * @return &#123;*&#125; */function bootWechatJSAPIPay (res: any)&#123;  let document: any;  if (typeof WeixinJSBridge === &#x27;undefined&#x27;)  &#123;    if (document.addEventListener)    &#123;      document.addEventListener(&#x27;WeixinJSBridgeReady&#x27;, onBridgeReady, false);    &#125;    else if (document.attachEvent)    &#123;      document.attachEvent(&#x27;WeixinJSBridgeReady&#x27;, onBridgeReady);      document.attachEvent(&#x27;onWeixinJSBridgeReady&#x27;, onBridgeReady);    &#125;  &#125;  else &#123;    onBridgeReady(res)  &#125;&#125;// 调起微信JSAPI支付export &#123;  bootWechatJSAPIPay&#125;
+
+以上typScript方法封装
+4、前端获取openID方法window.location.replace(`$&#123;baseURL&#125;/api/v1/wechat/oauth?authorization=$&#123;sign&#125;&amp;returnUrl=$&#123;url.href&#125;`)
+5、文件内方法调用import &#123; bootWechatJSAPIPay &#125; from &#x27;src/hooks/pay&#x27;bootWechatJSAPIPay(param)
+如果文档内容没有解决您的问题，您还可以前往 微信开放社区 寻求帮助
+]]></content>
+      <categories>
+        <category>微信开发</category>
+      </categories>
+      <tags>
+        <tag>WeiXinPay</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题</title>
+    <url>//55bb1443.html</url>
+    <content><![CDATA[在vite项目中，有时候我们需要全局引入css变量、scss变量，或者引入全局scss样式文件，vite提供了以下这种配置方式//vite.config.jscss: &#123;  preprocessorOptions: &#123;    //define global scss variable    scss: &#123;      additionalData: `@import &#x27;@/styles/variables.scss&#x27;;`,    &#125;  &#125;&#125;
+这种写法没有任何问题，并且我已经在一些项目中实践过了，可有一次我创建新项目的时候却无效了，在浏览器上也没有看到任何相关的样式，但是在main.js中引入又是正常的,后来去插件官方论坛找到了解决方法是这样说的。
+原来这不是一个bug，只有在main.js引入一个其他scss文件或者在.vue文件中使用 style，并且里面有内容，则 scss.additionalData 配置的全局scss文件就可以正确引入了，还建议我们在 scss.additionalData 引入的文件最好只写scss变量，别写css变量，因为css变量是运行时属性,至此，这个问题算是圆满解决了]]></content>
+      <categories>
+        <category>Vite</category>
+      </categories>
+      <tags>
+        <tag>Vite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装依赖超时443解决</title>
+    <url>//e973ebbc.html</url>
+    <content><![CDATA[安装依赖的时候有时会遇到安装不上超时等问题
+解决方法使用IPv4的方法连接而不是IPv6更改方式
+注意别把IPv4也给禁用掉，取消勾选IPv6即可
+确认成功后即可正常安装依赖]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>NPM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建UTXO</title>
+    <url>//e5a32ca1.html</url>
+    <content><![CDATA[BTC创建UTXO并用Joy ID广播安装依赖pnpm install bitcoinjs-lib tiny-secp256k1 axios @joyid/bitcoin
+获取剩余UTXOconst getUtxos = async (address: string) =&gt; &#123;    try &#123;        const response = await axios.get(`https://blockstream.info/testnet/api/address/$&#123;address&#125;/utxo`);        return response.data;    &#125; catch (error) &#123;        console.error(&#x27;Error fetching UTXO:&#x27;, error);        throw error;    &#125;&#125;;
+创建交易    const [txHex, setTxHex] = useState(&#x27;&#x27;);    const createTransaction = async () =&gt; &#123;    const network = bitcoin.networks.testnet; // 使用比特币测试网络    const senderAddress = address;    const recipientAddress = &#x27;tb1qp4gpusm5vq7ysa38wa92a6n8ps89hp7ts2907m&#x27;;    const amountToSend = 0.0001 * 1e8; // 发送的金额，单位是聪（satoshis）    // 获取 UTXO（未花费的交易输出）    const utxos = await getUtxos();    if (utxos.length === 0) &#123;        throw new Error(&#x27;No UTXOs available for the address.&#x27;);    &#125;    const utxo = utxos[0]; // 使用第一个 UTXO，实际应用中可能需要选择最佳 UTXO    // 检查 txid 是否有效    if (!/^[0-9a-fA-F]&#123;64&#125;$/.test(utxo.txid)) &#123;        throw new TypeError(&#x27;Invalid txid&#x27;);    &#125;    // 创建 PSBT    const psbt = new bitcoin.Psbt(&#123; network &#125;);    try &#123;        psbt.addInput(&#123;            hash: utxo.txid,            index: utxo.vout,            witnessUtxo: &#123;                script: bitcoin.address.toOutputScript(senderAddress, network),                value: utxo.value,            &#125;,        &#125;);    &#125; catch (error) &#123;        throw error;    &#125;    try &#123;        psbt.addOutput(&#123;            address: recipientAddress,            value: amountToSend,        &#125;);    &#125; catch (error) &#123;        throw error;    &#125;    // 找零地址和找零金额，如果有的话    const changeAddress = senderAddress;    const fee = 0.00001 * 1e8; // 示例费用    const changeValue = utxo.value - amountToSend - fee;    if (changeValue &gt; 0) &#123;        try &#123;            psbt.addOutput(&#123;                address: changeAddress,                value: changeValue,            &#125;);        &#125; catch (error) &#123;            throw error;        &#125;    &#125;    const psbtHex = psbt.toHex();    setTxHex(psbtHex)&#125;;
+监听到psbtHex创建完成捕获并使用JoyID广播import &#123; sendPsbt &#125; from &quot;@joyid/bitcoin&quot;;const sendContract = async () =&gt; &#123;    const tx = await sendPsbt(txHex)    console.log(tx, &#x27;tx&#x27;);&#125;]]></content>
+      <categories>
+        <category>Web3</category>
+      </categories>
+      <tags>
+        <tag>BTC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小程序随手笔记</title>
+    <url>//edba0ae4.html</url>
+    <content><![CDATA[1、组件之间的传值、方法调用1、子组件调用方法在父组件的json文件中注册子组件的路径
+&#123;  &quot;usingComponents&quot;: &#123;    &quot;progress&quot;: &quot;../componets/progress/progress&quot;  &#125;&#125;
+直接在xml中使用就可以
+&lt;progress&gt;&lt;/progress&gt;
+2、子组件调用父组件页面刷新方法需要子组件获取父组件的方法
+methods: &#123;    switch: function(e) &#123;        const page = getCurrentPages().pop(); // 当前所在的父组件页面        page.onShow() // 父组件页面刷新           &#125;&#125;
+]]></content>
+      <categories>
+        <category>微信小程序</category>
+      </categories>
+      <tags>
+        <tag>微信小程序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>播放Spine动画</title>
+    <url>//35eaf0f1.html</url>
+    <content><![CDATA[安装spine官方依赖pnpm add @esotericsoftware/spine-player
+播放函数(需将动画文件传到CDN或保存到项目文件夹)const playerContainerRef: any = useRef&lt;HTMLDivElement&gt;(null);const loadFiles = () =&gt; &#123;    const skeletonJsonUrl = `https://xxx/atlas/box-gem/box.json`    const atlasUrl = `https://xxx/atlas/box-gem/box.atlas`    const player: any = new SpinePlayer(playerContainerRef.current, &#123;        jsonUrl: skeletonJsonUrl,        atlasUrl: atlasUrl,        animation: &#x27;idle&#x27;,        alpha: true,        showLoading: false    &#125; as any);    playerContainerRef.current.style.pointerEvents = &#x27;none&#x27;;&#125;;useEffect(() =&gt; &#123;    loadFiles()&#125;, []);
+]]></content>
+      <categories>
+        <category>前端动画</category>
+      </categories>
+      <tags>
+        <tag>Animate</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电脑共享VPN到手机方法</title>
+    <url>//36de35a5.html</url>
+    <content><![CDATA[实现原理电脑开启VPN，手机和电脑连接同一个WIFI,设置手机代理为电脑的HTTP代理端口，从而实现共享VPN1.设置代理的方法如下图所示，我使用的是clash,在查看clash代理端口时，可以直接在windows搜索栏中输入“代理服务器设置”， 其他的vpn应该类似。
+2.手机wifi代理设置完毕之后就可以正常使用网络了]]></content>
+      <categories>
+        <category>开发工具</category>
+      </categories>
+      <tags>
+        <tag>VPN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决iOS分发Non-public API问题</title>
+    <url>//90338fix.html</url>
+    <content><![CDATA[问题描述在提交 iOS 应用到 TestFlight 或 App Store 时，遇到以下错误：
+90338: Non-public API usage. The app references non-public selectors in Chainbox-QA: _isKeyDown, _modifiedInput, _modifierFlags. If method names in your source code match the private Apple APIs listed above, altering your method names will help prevent this app from being flagged in future submissions.
+
+这是因为 React Native 的 RCTKeyCommands.m 和其他文件中使用了 Apple 的私有 API 选择器。
+解决方案在 Podfile 中添加 post_install 脚本，自动替换这些私有 API 名称。
+1. 首先定义 find_and_replace 函数在 Podfile 顶部添加：
+def find_and_replace(dir, findstr, replacestr)  Dir[dir].each do |name|    text = File.read(name)    replace = text.gsub(findstr, replacestr)    if text != replace      puts &quot;Fix: &quot; + name      File.open(name, &quot;w&quot;) &#123; |file| file.puts replace &#125;      STDOUT.flush    end  end  Dir[dir + &#x27;*/&#x27;].each(&amp;method(:find_and_replace))end
+
+2. 在 post_install 中调用替换post_install do |installer|  # 替换 RCTKeyCommands.m 中的私有 API  find_and_replace(&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;,                   &quot;_modifierFlags&quot;,                   &quot;_modifierEventFlags&quot;)  find_and_replace(&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;,                   &quot;_modifiedInput&quot;,                   &quot;_modifiedEventInput&quot;)  find_and_replace(&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;,                   &quot;_isKeyDown&quot;,                   &quot;_isKeyEventDown&quot;)    # 替换 RCTPackagerClient.h 中的私有 API  find_and_replace(&quot;./node_modules/react-native/React/DevSupport/RCTPackagerClient.h&quot;,                   &quot;handleNotification&quot;,                   &quot;handlePackageNotification&quot;)    # 替换 RCTPackagerConnection.mm 中的私有 API  find_and_replace(&quot;./node_modules/react-native/React/DevSupport/RCTPackagerConnection.mm&quot;,                   &quot;handleNotification&quot;,                   &quot;handlePackageNotification&quot;)    # 其他 post_install 配置...end
+
+完整 Podfile 示例def find_and_replace(dir, findstr, replacestr)  Dir[dir].each do |name|    text = File.read(name)    replace = text.gsub(findstr, replacestr)    if text != replace      puts &quot;Fix: &quot; + name      File.open(name, &quot;w&quot;) &#123; |file| file.puts replace &#125;      STDOUT.flush    end  end  Dir[dir + &#x27;*/&#x27;].each(&amp;method(:find_and_replace))end# ... 你的其他 Podfile 配置 ...post_install do |installer|  # 修复 Non-public API 问题  find_and_replace(&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;,                   &quot;_modifierFlags&quot;, &quot;_modifierEventFlags&quot;)  find_and_replace(&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;,                   &quot;_modifiedInput&quot;, &quot;_modifiedEventInput&quot;)  find_and_replace(&quot;./node_modules/react-native/React/Base/RCTKeyCommands.m&quot;,                   &quot;_isKeyDown&quot;, &quot;_isKeyEventDown&quot;)  find_and_replace(&quot;./node_modules/react-native/React/DevSupport/RCTPackagerClient.h&quot;,                   &quot;handleNotification&quot;, &quot;handlePackageNotification&quot;)  find_and_replace(&quot;./node_modules/react-native/React/DevSupport/RCTPackagerConnection.mm&quot;,                   &quot;handleNotification&quot;, &quot;handlePackageNotification&quot;)end
+
+使用步骤
+将上述代码添加到 ios/Podfile
+运行 pod install
+重新构建并提交到 TestFlight
+
+注意事项
+每次运行 pod install 时会自动执行替换
+这个修复适用于 debug 模式上传到 TestFlight
+如果更新了 React Native 版本，可能需要调整文件路径
+
+相关链接
+Apple Technical Support
+React Native GitHub Issues
+
+]]></content>
+      <categories>
+        <category>React Native</category>
+      </categories>
+      <tags>
+        <tag>React Native</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目笔记</title>
+    <url>//7705a76.html</url>
+    <content><![CDATA[1、项目网络状态监听并跳转路由onMounted(() =&gt; &#123;  window.addEventListener(&#x27;offline&#x27;, ()=&gt;&#123;    // 网络异常时触发    router.push(&#123; name: &#x27;Disconnect&#x27; &#125;)    sessionStorage.locationUrl=window.location.href;  &#125;);  window.addEventListener(&#x27;online&#x27;,()=&gt;&#123;    // 网络恢复正常时触发    window.location.href=sessionStorage.locationUrl  &#125;);&#125;)
+2、H5项目每次跳转路由滚动条回到顶部在路由守卫中配置
+document.title = to.meta.titlewindow.scrollTo(0,0)]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+</search>
