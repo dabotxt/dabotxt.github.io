@@ -3,6 +3,7 @@ title: 关于Vite配置preprocessorOptions.scss.additionalData全局引入scss�
 abbrlink: 55bb1443
 date: 2025-01-06 10:48:34
 tags: Vite
+categories: Vite
 cover: 'https://s1.ax1x.com/2022/05/05/OeUDJA.jpg'
 top_img: 'https://s1.ax1x.com/2022/05/05/OeUIWn.png'
 ---

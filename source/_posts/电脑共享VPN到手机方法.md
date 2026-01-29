@@ -3,6 +3,7 @@ title: 电脑共享VPN到手机方法
 abbrlink: 36de35a5
 date: 2024-08-21 17:03:09
 tags: VPN
+categories: 开发工具
 cover: '/images/vpn.png'
 top_img: '/images/vpn.png'
 ---

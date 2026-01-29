@@ -1,6 +1,7 @@
 ---
 title: ts实现康威生命游戏
 tags: TypeScript
+categories: TypeScript
 cover: 'https://s1.ax1x.com/2022/05/05/OeYnqe.png'
 top_img: 'https://s1.ax1x.com/2022/05/05/OeY4iR.png'
 abbrlink: 8cc9b930

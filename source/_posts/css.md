@@ -1,6 +1,7 @@
 ---
 title: 解决切换路由因高度不够出现滚动条导致页面抖动
 tags: Css
+categories: CSS
 cover: https://s1.ax1x.com/2022/05/16/OW163t.jpg
 top_img: https://s1.ax1x.com/2022/05/16/OW1bvV.png
 abbrlink: 78cea6d8

@@ -1,6 +1,7 @@
 ---
 title: Vite+Vue3+TypeScript轻量级框架搭建(1)
 tags: Vite
+categories: Vite
 cover: 'https://s1.ax1x.com/2022/05/05/OeUDJA.jpg'
 top_img: 'https://s1.ax1x.com/2022/05/05/OeUIWn.png'
 abbrlink: 5e9df9d6

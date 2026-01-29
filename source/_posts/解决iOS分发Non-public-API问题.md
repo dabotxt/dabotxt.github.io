@@ -3,6 +3,7 @@ title: 解决iOS分发Non-public API问题
 abbrlink: 90338fix
 date: 2026-01-29 10:38:20
 tags: React Native
+categories: React Native
 cover: 'https://s1.ax1x.com/2022/05/10/OtyPTx.jpg'
 top_img: 'https://s1.ax1x.com/2022/05/10/OtyvUP.jpg'
 ---

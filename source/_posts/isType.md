@@ -4,6 +4,8 @@ abbrlink: 4a17b166
 cover: https://s1.ax1x.com/2022/05/05/OeYnqe.png
 top_img: https://s1.ax1x.com/2022/05/05/OeY4iR.png
 tags: TypeScript
+categories: TypeScript
+date: 2022-04-28 12:00:00
 ---
 ### 在utils目录下创建一个isType文件
 

@@ -3,6 +3,8 @@ title: 微信支付JSAPI前端调起支付
 abbrlink: 4a17b158
 cover: https://s1.ax1x.com/2022/04/28/LOHQrF.jpg
 tags: WeiXinPay
+categories: 微信开发
+date: 2022-04-28 12:00:00
 ---
 在微信浏览器里面打开H5网页中执行JS调起支付。接口输入输出数据格式为JSON。
 ## 注意：WeixinJSBridge内置对象在其他浏览器中无效。

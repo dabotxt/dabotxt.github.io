@@ -3,6 +3,7 @@ title: router
 abbrlink: 45d2f225
 date: 2022-05-09 17:28:11
 tags: Vue
+categories: Vue
 cover: https://s1.ax1x.com/2022/04/29/LvoXHe.png
 top_img: https://s1.ax1x.com/2022/04/29/LvTVEQ.jpg
 ---

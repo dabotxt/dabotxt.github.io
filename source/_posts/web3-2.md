@@ -1,6 +1,7 @@
 ---
 title: web3.js监听用户切换钱包状态
 tags: Web3.js
+categories: Web3
 cover: 'https://s1.ax1x.com/2022/05/10/OtyPTx.jpg'
 top_img: 'https://s1.ax1x.com/2022/05/10/OtyvUP.jpg'
 abbrlink: eff061d5

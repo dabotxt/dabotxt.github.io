@@ -3,6 +3,7 @@ title: OKX插件登录BTC
 abbrlink: 4c3e688d
 date: 2024-08-09 15:05:01
 tags: BTC
+categories: Web3
 cover: '/images/okx-banner.png'
 top_img: '/images/okx-banner.png'
 ---

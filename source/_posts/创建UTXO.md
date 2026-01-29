@@ -1,6 +1,7 @@
 ---
 title: 创建UTXO
 tags: BTC
+categories: Web3
 abbrlink: e5a32ca1
 date: 2024-08-08 18:00:20
 cover: https://s21.ax1x.com/2024/08/08/pkzactO.png

@@ -3,6 +3,7 @@ title: Wagmi返回合约完整错误日志
 abbrlink: c49bf0df
 date: 2024-08-09 14:44:36
 tags: Web3.js
+categories: Web3
 cover: 'https://s1.ax1x.com/2022/05/10/OtyPTx.jpg'
 top_img: 'https://s1.ax1x.com/2022/05/10/OtyvUP.jpg'
 ---

@@ -5,6 +5,7 @@ date: 2022-05-09 15:59:30
 cover: https://s1.ax1x.com/2022/05/09/OG6eoT.png
 top_img: https://s1.ax1x.com/2022/05/09/OG6YTK.png
 tags: Pinia
+categories: Vue
 ---
 ### Pinia与Vuex的不同
 Pinia是Vue.js团队开发的一个全新的状态管理库，并且Pinia符合Vuex5的提案，已被纳入官方GitHub。  
@@ -38,7 +39,7 @@ export const userStore = defineStore('user', {
     },
     actions: {
         doubleCount() {
-            this,count = this.count * 2
+            this.count = this.count * 2
         }
     }
 })
@@ -81,7 +82,7 @@ export const userStore = defineStore('user', {
         doubleCount() {
             this.count = this.count * 2
         },
-        asycn login(account, passWord) {
+        async login(account, passWord) {
             const { data } = await api.login(account, passWord)
             return data
         }

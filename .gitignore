@@ -2,3 +2,9 @@
 *.log
 public/
 .deploy*/
+node_modules/
+db.json
+.idea/
+*.swp
+*.swo
+package-lock.json

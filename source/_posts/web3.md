@@ -5,6 +5,7 @@ date: 2022-05-10 15:52:10
 cover: https://s1.ax1x.com/2022/05/10/OtyPTx.jpg
 top_img: https://s1.ax1x.com/2022/05/10/OtyvUP.jpg
 tags: Web3.js
+categories: Web3
 ---
 ### web3.js 库是一系列模块的集合，服务于以太坊生态系统的各个功能，如：
 web3-eth 用来与以太坊区块链及合约的交互  

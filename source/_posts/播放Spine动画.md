@@ -3,6 +3,7 @@ title: 播放Spine动画
 abbrlink: 35eaf0f1
 date: 2024-08-08 18:20:44
 tags: Animate
+categories: 前端动画
 cover: https://zh.esotericsoftware.com/img/core/spine_logo_bright.svg
 top_img: https://zh.esotericsoftware.com/img/core/spine_logo_bright.svg
 ---
