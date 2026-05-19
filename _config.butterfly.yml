@@ -201,3 +201,12 @@ giscus:
   dark_theme: dark
   js:
   option:
+# Mermaid 图表
+mermaid:
+  enable: true
+  code_write: true
+  theme:
+    light: default
+    dark: dark
+  open_in_new_tab: true
+  zoom_pan: true
