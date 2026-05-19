@@ -160,9 +160,330 @@
   isToc: true,
   pageType: 'post'
 }</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s1.ax1x.com/2022/05/05/OeY4iR.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Big Pineapple</span></a><a class="nav-page-title" href="/"><span class="site-name">前端判断当前访问设备类型</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div></div></nav><div id="post-info"><h1 class="post-title">前端判断当前访问设备类型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-28T04:00:00.000Z" title="发表于 2022-04-28 12:00:00">2022-04-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-29T08:07:22.550Z" title="更新于 2026-01-29 16:07:22">2026-01-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/TypeScript/">TypeScript</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="在utils目录下创建一个isType文件"><a href="#在utils目录下创建一个isType文件" class="headerlink" title="在utils目录下创建一个isType文件"></a>在utils目录下创建一个isType文件</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ua = <span class="variable language_">window</span>.<span class="property">navigator</span>.<span class="property">userAgent</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isWap = <span class="regexp">/Android|iPhone|ios|iPad|iPod|BlackBerry|IEMobile/i</span>.<span class="title function_">test</span>(ua); <span class="comment">// 是否是移动端</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isWeixin = <span class="regexp">/MicroMessenger/i</span>.<span class="title function_">test</span>(ua); <span class="comment">// 是否是微信浏览器</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isAlipay = <span class="regexp">/AlipayClient/i</span>.<span class="title function_">test</span>(ua); <span class="comment">// 是否是支付宝浏览器</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isAndroid = <span class="regexp">/Android/i</span>.<span class="title function_">test</span>(ua); <span class="comment">// 是否安卓设备</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isIOS = <span class="regexp">/iphone|ios|ipad|ipod/i</span>.<span class="title function_">test</span>(ua);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isMainClient = <span class="regexp">/aijiao100\(newk12/i</span>.<span class="title function_">test</span>(ua);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isWeibo = <span class="regexp">/(weibo).*weibo__([\d.]+)/i</span>.<span class="title function_">test</span>(ua);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isQQ = <span class="regexp">/qq\/([\d.]+)/i</span>.<span class="title function_">test</span>(ua);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isQQBrowser = <span class="regexp">/(qqbrowser)\/([\d.]+)/i</span>.<span class="title function_">test</span>(ua);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isQzone = <span class="regexp">/qzone\/.*_qz_([\d.]+)/i</span>.<span class="title function_">test</span>(ua);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isInApp = isWeixin || isAlipay || isWeibo || isQQ || isMainClient;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 安卓 chrome 浏览器，很多 app 都是在 chrome 的 ua 上进行扩展的</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isOriginalChrome = <span class="regexp">/chrome\/[\d.]+ Mobile Safari\/[\d.]+/i</span>.<span class="title function_">test</span>(ua) &amp;&amp; isAndroid;</span><br><span class="line"></span><br><span class="line"><span class="comment">// chrome for ios 和 safari 的区别仅仅是将 Version/&lt;VersionNum&gt; 替换成了 CriOS/&lt;ChromeRevision&gt;</span></span><br><span class="line"><span class="comment">// ios 上很多 app 都包含 safari 标识，但它们都是以自己的 app 标识开头，而不是 Mozilla</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> isSafari = <span class="regexp">/safari\/([\d.]+)$/i</span>.<span class="title function_">test</span>(ua) &amp;&amp; <span class="regexp">/iphone|ios|ipad|ipod/i</span>.<span class="title function_">test</span>(ua) &amp;&amp; ua.<span class="title function_">indexOf</span>(<span class="string">&#x27;Crios&#x27;</span>) &lt; <span class="number">0</span> &amp;&amp; ua.<span class="title function_">indexOf</span>(<span class="string">&#x27;Mozilla&#x27;</span>) === <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; isWap &#125; <span class="keyword">from</span> <span class="string">&#x27;./utils/isType&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span> (isWap) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;当前是移动端&#x27;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;当前是PC端&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://dabotxt.github.io">DB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://dabotxt.github.io/4a17b166.html">https://dabotxt.github.io/4a17b166.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://dabotxt.github.io" target="_blank">Big Pineapple</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/TypeScript/">TypeScript</a></div><div class="post-share"><div class="social-share" data-image="https://s1.ax1x.com/2022/05/05/OeYnqe.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/4a17b158.html" title="微信支付JSAPI前端调起支付"><img class="cover" src="https://s1.ax1x.com/2022/04/28/LOHQrF.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">微信支付JSAPI前端调起支付</div></div><div class="info-2"><div class="info-item-1">在微信浏览器里面打开H5网页中执行JS调起支付。接口输入输出数据格式为JSON。 注意：WeixinJSBridge内置对象在其他浏览器中无效。1、网页端接口请求参数列表12345678&#123;  appid: string, // appId为当前服务商号绑定的appid  timeStamp: string, // 当前的时间  nonceStr: string, // 随机字符串，不长于32位。  package: string, // 统一下单接口返回的prepay_id参数值  signType: string, // 签名类型，默认为MD5，支持HMAC-SHA256和MD5。  paySign: string // 签名&#125;  以上参数皆是必填项统一由后端接口返回参数 2、返回结果值说明123get_brand_wcpay_request:ok // 支付成功get_brand_wcpay_request:cancel // 支付过程中用户取消get_brand_wcpay_request:fail // 支付失败  注：JS API的返回结果get_b...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/8cc9b930.html" title="ts实现康威生命游戏"><img class="cover" src="https://s1.ax1x.com/2022/05/05/OeYnqe.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-12</div><div class="info-item-2">ts实现康威生命游戏</div></div><div class="info-2"><div class="info-item-1">生命游戏中，对于任意细胞，规则如下： 每个细胞有两种状态 - 存活或死亡，每个细胞与以自身为中心的周围八格细胞产生互动（如图，黑色为存活，白色为死亡） 当前细胞为存活状态时，当周围的存活细胞低于2个时（不包含2个），该细胞变成死亡状态。（模拟生命数量稀少） 当前细胞为存活状态时，当周围有2个或3个存活细胞时，该细胞保持原样。 当前细胞为存活状态时，当周围有超过3个存活细胞时，该细胞变成死亡状态。（模拟生命数量过多） 当前细胞为死亡状态时，当周围有3个存活细胞时，该细胞变成存活状态。（模拟繁殖） 可以把最初的细胞结构定义为种子，当所有在种子中的细胞同时被以上规则处理后，可以得到第一代细胞图。按规则继续处理当前的细胞图，可以得到下一代的细胞图，周而复始。  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263export class GameOfLife &#123;    private activeC...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://s1.ax1x.com/2022/04/29/LvbDbT.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">DB</div><div class="author-info-description">事当决而不决者，愚人也</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://haiyong.site/moyu/shengchengshu.html"><i class="iconfont icon-youxishoubing"></i><span>Just Relax</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center">微信号：***</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; isWap &#125; <span class="keyword">from</span> <span class="string">&#x27;./utils/isType&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span> (isWap) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;当前是移动端&#x27;</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;当前是PC端&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://dabotxt.github.io">DB</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://dabotxt.github.io/4a17b166.html">https://dabotxt.github.io/4a17b166.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://dabotxt.github.io" target="_blank">Big Pineapple</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/TypeScript/">TypeScript</a></div><div class="post-share"><div class="social-share" data-image="https://s1.ax1x.com/2022/05/05/OeYnqe.png" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/4a17b158.html" title="微信支付JSAPI前端调起支付"><img class="cover" src="https://s1.ax1x.com/2022/04/28/LOHQrF.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">微信支付JSAPI前端调起支付</div></div><div class="info-2"><div class="info-item-1">在微信浏览器里面打开H5网页中执行JS调起支付。接口输入输出数据格式为JSON。 注意：WeixinJSBridge内置对象在其他浏览器中无效。1、网页端接口请求参数列表12345678&#123;  appid: string, // appId为当前服务商号绑定的appid  timeStamp: string, // 当前的时间  nonceStr: string, // 随机字符串，不长于32位。  package: string, // 统一下单接口返回的prepay_id参数值  signType: string, // 签名类型，默认为MD5，支持HMAC-SHA256和MD5。  paySign: string // 签名&#125;  以上参数皆是必填项统一由后端接口返回参数 2、返回结果值说明123get_brand_wcpay_request:ok // 支付成功get_brand_wcpay_request:cancel // 支付过程中用户取消get_brand_wcpay_request:fail // 支付失败  注：JS API的返回结果get_b...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/8cc9b930.html" title="ts实现康威生命游戏"><img class="cover" src="https://s1.ax1x.com/2022/05/05/OeYnqe.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-12</div><div class="info-item-2">ts实现康威生命游戏</div></div><div class="info-2"><div class="info-item-1">生命游戏中，对于任意细胞，规则如下： 每个细胞有两种状态 - 存活或死亡，每个细胞与以自身为中心的周围八格细胞产生互动（如图，黑色为存活，白色为死亡） 当前细胞为存活状态时，当周围的存活细胞低于2个时（不包含2个），该细胞变成死亡状态。（模拟生命数量稀少） 当前细胞为存活状态时，当周围有2个或3个存活细胞时，该细胞保持原样。 当前细胞为存活状态时，当周围有超过3个存活细胞时，该细胞变成死亡状态。（模拟生命数量过多） 当前细胞为死亡状态时，当周围有3个存活细胞时，该细胞变成存活状态。（模拟繁殖） 可以把最初的细胞结构定义为种子，当所有在种子中的细胞同时被以上规则处理后，可以得到第一代细胞图。按规则继续处理当前的细胞图，可以得到下一代的细胞图，周而复始。  123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263export class GameOfLife &#123;    private activeC...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://s1.ax1x.com/2022/04/29/LvbDbT.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">DB</div><div class="author-info-description">事当决而不决者，愚人也</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://haiyong.site/moyu/shengchengshu.html"><i class="iconfont icon-youxishoubing"></i><span>Just Relax</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center">微信号：***</p>
 <p align="center">QQ号：***</p>
-</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8utils%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAisType%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">在utils目录下创建一个isType文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">使用方法</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/90338fix.html" title="解决iOS分发Non-public API问题"><img src="https://s1.ax1x.com/2022/05/10/OtyPTx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解决iOS分发Non-public API问题"/></a><div class="content"><a class="title" href="/90338fix.html" title="解决iOS分发Non-public API问题">解决iOS分发Non-public API问题</a><time datetime="2026-01-29T02:38:20.000Z" title="发表于 2026-01-29 10:38:20">2026-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/55bb1443.html" title="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题"><img src="https://s1.ax1x.com/2022/05/05/OeUDJA.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题"/></a><div class="content"><a class="title" href="/55bb1443.html" title="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题">关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题</a><time datetime="2025-01-06T02:48:34.000Z" title="发表于 2025-01-06 10:48:34">2025-01-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/e973ebbc.html" title="安装依赖超时443解决"><img src="/images/npm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="安装依赖超时443解决"/></a><div class="content"><a class="title" href="/e973ebbc.html" title="安装依赖超时443解决">安装依赖超时443解决</a><time datetime="2024-09-13T07:18:32.000Z" title="发表于 2024-09-13 15:18:32">2024-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/3bc3f9fd.html" title="Git推送失败443"><img src="/images/git.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git推送失败443"/></a><div class="content"><a class="title" href="/3bc3f9fd.html" title="Git推送失败443">Git推送失败443</a><time datetime="2024-08-21T09:22:44.000Z" title="发表于 2024-08-21 17:22:44">2024-08-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/36de35a5.html" title="电脑共享VPN到手机方法"><img src="/images/vpn.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="电脑共享VPN到手机方法"/></a><div class="content"><a class="title" href="/36de35a5.html" title="电脑共享VPN到手机方法">电脑共享VPN到手机方法</a><time datetime="2024-08-21T09:03:09.000Z" title="发表于 2024-08-21 17:03:09">2024-08-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2022 - 2026 By DB</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
+</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8utils%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAisType%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">在utils目录下创建一个isType文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">使用方法</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/auth-token-flow-standard.html" title="标准化登录与Token维护流程图">标准化登录与Token维护流程图</a><time datetime="2026-05-19T08:20:00.000Z" title="发表于 2026-05-19 16:20:00">2026-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/90338fix.html" title="解决iOS分发Non-public API问题"><img src="https://s1.ax1x.com/2022/05/10/OtyPTx.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解决iOS分发Non-public API问题"/></a><div class="content"><a class="title" href="/90338fix.html" title="解决iOS分发Non-public API问题">解决iOS分发Non-public API问题</a><time datetime="2026-01-29T02:38:20.000Z" title="发表于 2026-01-29 10:38:20">2026-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/55bb1443.html" title="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题"><img src="https://s1.ax1x.com/2022/05/05/OeUDJA.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题"/></a><div class="content"><a class="title" href="/55bb1443.html" title="关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题">关于Vite配置preprocessorOptions.scss.additionalData全局引入scss文件无效问题</a><time datetime="2025-01-06T02:48:34.000Z" title="发表于 2025-01-06 10:48:34">2025-01-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/e973ebbc.html" title="安装依赖超时443解决"><img src="/images/npm.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="安装依赖超时443解决"/></a><div class="content"><a class="title" href="/e973ebbc.html" title="安装依赖超时443解决">安装依赖超时443解决</a><time datetime="2024-09-13T07:18:32.000Z" title="发表于 2024-09-13 15:18:32">2024-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/3bc3f9fd.html" title="Git推送失败443"><img src="/images/git.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git推送失败443"/></a><div class="content"><a class="title" href="/3bc3f9fd.html" title="Git推送失败443">Git推送失败443</a><time datetime="2024-08-21T09:22:44.000Z" title="发表于 2024-08-21 17:22:44">2024-08-21</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2022 - 2026 By DB</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(() => {
+  const parseViewBox = viewBox => {
+    if (!viewBox) return null
+    const parts = viewBox.trim().split(/[\s,]+/).map(n => Number(n))
+    if (parts.length !== 4 || parts.some(n => Number.isNaN(n))) return null
+    return parts
+  }
+
+  const getSvgViewBox = svg => {
+    const attr = parseViewBox(svg.getAttribute('viewBox'))
+    if (attr) return attr
+
+    // Fallback: use bbox to build a viewBox
+    try {
+      const bbox = svg.getBBox()
+      if (bbox && bbox.width && bbox.height) return [bbox.x, bbox.y, bbox.width, bbox.height]
+    } catch (e) {
+      // getBBox may fail on some edge cases; ignore
+    }
+
+    const w = Number(svg.getAttribute('width')) || 0
+    const h = Number(svg.getAttribute('height')) || 0
+    if (w > 0 && h > 0) return [0, 0, w, h]
+    return [0, 0, 100, 100]
+  }
+
+  const setSvgViewBox = (svg, vb) => {
+    svg.setAttribute('viewBox', `${vb[0]} ${vb[1]} ${vb[2]} ${vb[3]}`)
+  }
+
+  const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
+
+  const openSvgInNewTab = ({ source, initViewBox }) => {
+    const getClonedSvg = () => {
+      if (typeof source === 'string') {
+        const template = document.createElement('template')
+        template.innerHTML = source.trim()
+        const svg = template.content.querySelector('svg')
+        return svg ? svg.cloneNode(true) : null
+      }
+      if (source && typeof source.cloneNode === 'function') {
+        return source.cloneNode(true)
+      }
+      return null
+    }
+
+    const clone = getClonedSvg()
+    if (!clone) return
+    if (initViewBox && initViewBox.length === 4) {
+      clone.setAttribute('viewBox', initViewBox.join(' '))
+    }
+    if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+    if (!clone.getAttribute('xmlns:xlink') && clone.outerHTML.includes('xlink:')) {
+      clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink')
+    }
+    // inject background to match current theme
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+    const bg = getComputedStyle(document.body).backgroundColor || (isDark ? '#1e1e1e' : '#ffffff')
+    if (!clone.style.background) clone.style.background = bg
+
+    const serializer = new XMLSerializer()
+    const svgSource = serializer.serializeToString(clone)
+    const htmlSource = `<!doctype html><html><head><meta charset="utf-8" />
+      <style>
+        html, body { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: ${bg}; }
+        svg { max-width: 100%; max-height: 100%; height: auto; width: auto; }
+      </style>
+      </head><body>${svgSource}</body></html>`
+    const blob = new Blob([htmlSource], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank', 'noopener')
+    setTimeout(() => URL.revokeObjectURL(url), 30000)
+  }
+
+  const attachMermaidViewerButton = wrap => {
+    let btn = wrap.querySelector('.mermaid-open-btn')
+    if (!btn) {
+      btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'mermaid-open-btn'
+      wrap.appendChild(btn)
+    }
+
+    btn.innerHTML = '<i class="fa fa-search fa-fw" aria-hidden="true"></i>'
+
+    if (!btn.__mermaidViewerBound) {
+      btn.addEventListener('click', e => {
+        e.preventDefault()
+        e.stopPropagation()
+        const svg = wrap.__mermaidOriginalSvg || wrap.querySelector('svg')
+        if (!svg) return
+        const initViewBox = wrap.__mermaidInitViewBox
+        if (typeof svg === 'string') {
+          openSvgInNewTab({ source: svg, initViewBox })
+          return
+        }
+        openSvgInNewTab({ source: svg, initViewBox })
+      })
+      btn.__mermaidViewerBound = true
+    }
+  }
+
+  // Zoom around a point (px, py) in the SVG viewport (in viewBox coordinates)
+  const zoomAtPoint = (vb, factor, px, py) => {
+    const w = vb[2] * factor
+    const h = vb[3] * factor
+    const nx = px - (px - vb[0]) * factor
+    const ny = py - (py - vb[1]) * factor
+    return [nx, ny, w, h]
+  }
+
+  const initMermaidGestures = wrap => {
+    const svg = wrap.querySelector('svg')
+    if (!svg) return
+
+    // Ensure viewBox exists so gestures always work
+    const initVb = getSvgViewBox(svg)
+    wrap.__mermaidInitViewBox = initVb
+    wrap.__mermaidCurViewBox = initVb.slice()
+    setSvgViewBox(svg, initVb)
+
+    // Avoid binding multiple times on themeChange/pjax
+    if (wrap.__mermaidGestureBound) return
+    wrap.__mermaidGestureBound = true
+
+    // Helper: map client (viewport) coordinate -> viewBox coordinate
+    const clientToViewBox = (clientX, clientY) => {
+      const rect = svg.getBoundingClientRect()
+      const vb = wrap.__mermaidCurViewBox || getSvgViewBox(svg)
+      const x = vb[0] + (clientX - rect.left) * (vb[2] / rect.width)
+      const y = vb[1] + (clientY - rect.top) * (vb[3] / rect.height)
+      return { x, y, rect, vb }
+    }
+
+    const state = {
+      pointers: new Map(),
+      startVb: null,
+      startDist: 0,
+      startCenter: null
+    }
+
+    const clampVb = vb => {
+      const init = wrap.__mermaidInitViewBox || vb
+      const minW = init[2] * 0.1
+      const maxW = init[2] * 10
+      const minH = init[3] * 0.1
+      const maxH = init[3] * 10
+      vb[2] = clamp(vb[2], minW, maxW)
+      vb[3] = clamp(vb[3], minH, maxH)
+      return vb
+    }
+
+    const setCurVb = vb => {
+      vb = clampVb(vb)
+      wrap.__mermaidCurViewBox = vb
+      setSvgViewBox(svg, vb)
+    }
+
+    const onPointerDown = e => {
+      // Allow only primary button for mouse
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      svg.setPointerCapture(e.pointerId)
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+
+      if (state.pointers.size === 1) {
+        state.startVb = (wrap.__mermaidCurViewBox || getSvgViewBox(svg)).slice()
+      } else if (state.pointers.size === 2) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        state.startDist = Math.hypot(dx, dy)
+        state.startVb = (wrap.__mermaidCurViewBox || getSvgViewBox(svg)).slice()
+        state.startCenter = { x: (pts[0].x + pts[1].x) / 2, y: (pts[0].y + pts[1].y) / 2 }
+      }
+    }
+
+    const onPointerMove = e => {
+      if (!state.pointers.has(e.pointerId)) return
+      state.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
+
+      // Pan with 1 pointer
+      if (state.pointers.size === 1 && state.startVb) {
+        const p = [...state.pointers.values()][0]
+        const prev = { x: e.clientX - e.movementX, y: e.clientY - e.movementY }
+        // movementX/Y unreliable on touch, compute from stored last position
+        const last = wrap.__mermaidLastSinglePointer || p
+        const dxClient = p.x - last.x
+        const dyClient = p.y - last.y
+        wrap.__mermaidLastSinglePointer = p
+
+        const { rect } = clientToViewBox(p.x, p.y)
+        const vb = (wrap.__mermaidCurViewBox || getSvgViewBox(svg)).slice()
+        const dx = dxClient * (vb[2] / rect.width)
+        const dy = dyClient * (vb[3] / rect.height)
+        setCurVb([vb[0] - dx, vb[1] - dy, vb[2], vb[3]])
+        return
+      }
+
+      // Pinch zoom with 2 pointers
+      if (state.pointers.size === 2 && state.startVb && state.startDist > 0) {
+        const pts = [...state.pointers.values()]
+        const dx = pts[0].x - pts[1].x
+        const dy = pts[0].y - pts[1].y
+        const dist = Math.hypot(dx, dy)
+        if (!dist) return
+        const factor = state.startDist / dist // dist bigger => zoom in (viewBox smaller)
+
+        const cx = (pts[0].x + pts[1].x) / 2
+        const cy = (pts[0].y + pts[1].y) / 2
+        const centerClient = { x: cx, y: cy }
+
+        const pxy = clientToViewBox(centerClient.x, centerClient.y)
+        const cpx = pxy.x
+        const cpy = pxy.y
+
+        const vb = zoomAtPoint(state.startVb, factor, cpx, cpy)
+        setCurVb(vb)
+      }
+    }
+
+    const onPointerUpOrCancel = e => {
+      state.pointers.delete(e.pointerId)
+      if (state.pointers.size === 0) {
+        state.startVb = null
+        state.startDist = 0
+        state.startCenter = null
+        wrap.__mermaidLastSinglePointer = null
+      } else if (state.pointers.size === 1) {
+        // reset single pointer baseline to avoid jump
+        wrap.__mermaidLastSinglePointer = [...state.pointers.values()][0]
+      }
+    }
+
+    // Wheel zoom (mouse/trackpad)
+    const onWheel = e => {
+      // ctrlKey on mac trackpad pinch; we treat both as zoom
+      e.preventDefault()
+      const delta = e.deltaY
+      const zoomFactor = delta > 0 ? 1.1 : 0.9
+      const { x, y } = clientToViewBox(e.clientX, e.clientY)
+      const vb = (wrap.__mermaidCurViewBox || getSvgViewBox(svg)).slice()
+      setCurVb(zoomAtPoint(vb, zoomFactor, x, y))
+    }
+
+    const onDblClick = () => {
+      const init = wrap.__mermaidInitViewBox
+      if (!init) return
+      wrap.__mermaidCurViewBox = init.slice()
+      setSvgViewBox(svg, init)
+    }
+
+    svg.addEventListener('pointerdown', onPointerDown)
+    svg.addEventListener('pointermove', onPointerMove)
+    svg.addEventListener('pointerup', onPointerUpOrCancel)
+    svg.addEventListener('pointercancel', onPointerUpOrCancel)
+    svg.addEventListener('wheel', onWheel, { passive: false })
+    svg.addEventListener('dblclick', onDblClick)
+  }
+
+  const runMermaid = ele => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    ele.forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+
+      // Clear old render (themeChange/pjax will rerun)
+      const oldSvg = item.querySelector('svg')
+      if (oldSvg) oldSvg.remove()
+      item.__mermaidGestureBound = false
+
+      const config = mermaidSrc.dataset.config ? JSON.parse(mermaidSrc.dataset.config) : {}
+      if (!config.theme) {
+        config.theme = theme
+      }
+      const mermaidThemeConfig = `%%{init: ${JSON.stringify(config)}}%%\n`
+      const mermaidID = `mermaid-${index}`
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+      const renderMermaid = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+        if (true) initMermaidGestures(item)
+        item.__mermaidOriginalSvg = svg
+        if (true) attachMermaidViewerButton(item)
+      }
+
+
+      // mermaid v9 and v10 compatibility
+      typeof renderFn === 'string' ? renderMermaid(renderFn) : renderFn.then(({ svg }) => renderMermaid(svg))
+    })
+  }
+
+  const codeToMermaid = () => {
+    const codeMermaidEle = document.querySelectorAll('pre > code.mermaid')
+    if (codeMermaidEle.length === 0) return
+
+    codeMermaidEle.forEach(ele => {
+      const preEle = document.createElement('pre')
+      preEle.className = 'mermaid-src'
+      preEle.hidden = true
+      preEle.textContent = ele.textContent
+      const newEle = document.createElement('div')
+      newEle.className = 'mermaid-wrap'
+      newEle.appendChild(preEle)
+      ele.parentNode.replaceWith(newEle)
+    })
+  }
+
+  const loadMermaid = () => {
+    if (true) codeToMermaid()
+    const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+    if ($mermaid.length === 0) return
+
+    const runMermaidFn = () => runMermaid($mermaid)
+    btf.addGlobalFn('themeChange', runMermaidFn, 'mermaid')
+    window.loadMermaid ? runMermaidFn() : btf.getScript('https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.min.js').then(runMermaidFn)
+  }
+
+  btf.addGlobalFn('encrypt', loadMermaid, 'mermaid')
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
   const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
   const option = null
 

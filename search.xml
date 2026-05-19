@@ -43,35 +43,6 @@ PC发起交易 目前仅支持BTC主网const sendBTC = () =&gt; &#123;    try &#
       </tags>
   </entry>
   <entry>
-    <title>解决切换路由因高度不够出现滚动条导致页面抖动</title>
-    <url>//78cea6d8.html</url>
-    <content><![CDATA[现在大多数页面都是采用主题内容水平居中布局，但是，这种布局存在一个问题。现在的浏览器滚动条默认是overflow:auto类型的，也就是说如果内容高度不足一屏，没有滚动条；如果超出才会出现滚动条。滚动条也是占据屏幕尺寸的，从没有滚动条到有滚动条会使页面左右抖动一下。现有三种解决方法：
-让垂直滚动条一直显示body &#123;    overflow-y: scroll;&#125;
-即使内容高度不足一屏也会显示滚动条，比较影响用户体验
-当内容高度超过一屏时，在浏览器左侧同时加上一个滚动条宽的的padding或margin.wrap-outer &#123;    margin-left: calc(100vw - 100%);&#125;
-margin换成padding一样可以生效
-推荐使用兼容写法html &#123;    overflow-x: hidden;    overflow-y: auto;&#125;body &#123;    width: 100vw;    overflow: hidden;&#125;]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>Css</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>flex弹性盒子布局最后一行不满时左对齐实现思路</title>
-    <url>//8513d6fd.html</url>
-    <content><![CDATA[只需要在弹性盒子的容器加一个伪类元素，大小就是盒子内容的宽高就可以实现。
-&lt;ul&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;&lt;/ul&gt;
-*&#123;    padding: 0px;    list-style: none;&#125;ul&#123;    width: 1000px;    height: 800px;    border: 1px solid #000;    display: flex;    flex-flow: row wrap;    justify-content: space-between;&#125;li&#123;    width: 300px;    height: 300px;    border: 1px solid #456;&#125;ul::after&#123;    width: 300px;    height: 300px;    content: &#x27;&#x27;;&#125;]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>Css</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>前端判断当前访问设备类型</title>
     <url>//4a17b166.html</url>
     <content><![CDATA[在utils目录下创建一个isType文件const ua = window.navigator.userAgent;export const isWap = /Android|iPhone|ios|iPad|iPod|BlackBerry|IEMobile/i.test(ua); // 是否是移动端export const isWeixin = /MicroMessenger/i.test(ua); // 是否是微信浏览器export const isAlipay = /AlipayClient/i.test(ua); // 是否是支付宝浏览器export const isAndroid = /Android/i.test(ua); // 是否安卓设备export const isIOS = /iphone|ios|ipad|ipod/i.test(ua);export const isMainClient = /aijiao100\(newk12/i.test(ua);export const isWeibo = /(weibo).*weibo__([\d.]+)/i.test(ua);export const isQQ = /qq\/([\d.]+)/i.test(ua);export const isQQBrowser = /(qqbrowser)\/([\d.]+)/i.test(ua);export const isQzone = /qzone\/.*_qz_([\d.]+)/i.test(ua);export const isInApp = isWeixin || isAlipay || isWeibo || isQQ || isMainClient;// 安卓 chrome 浏览器，很多 app 都是在 chrome 的 ua 上进行扩展的export const isOriginalChrome = /chrome\/[\d.]+ Mobile Safari\/[\d.]+/i.test(ua) &amp;&amp; isAndroid;// chrome for ios 和 safari 的区别仅仅是将 Version/&lt;VersionNum&gt; 替换成了 CriOS/&lt;ChromeRevision&gt;// ios 上很多 app 都包含 safari 标识，但它们都是以自己的 app 标识开头，而不是 Mozillaexport const isSafari = /safari\/([\d.]+)$/i.test(ua) &amp;&amp; /iphone|ios|ipad|ipod/i.test(ua) &amp;&amp; ua.indexOf(&#x27;Crios&#x27;) &lt; 0 &amp;&amp; ua.indexOf(&#x27;Mozilla&#x27;) === 0;
@@ -104,6 +75,22 @@ import &#123; defineStore &#125; from &#x27;pinia&#x27;export const userStore = 
       </tags>
   </entry>
   <entry>
+    <title>解决切换路由因高度不够出现滚动条导致页面抖动</title>
+    <url>//78cea6d8.html</url>
+    <content><![CDATA[现在大多数页面都是采用主题内容水平居中布局，但是，这种布局存在一个问题。现在的浏览器滚动条默认是overflow:auto类型的，也就是说如果内容高度不足一屏，没有滚动条；如果超出才会出现滚动条。滚动条也是占据屏幕尺寸的，从没有滚动条到有滚动条会使页面左右抖动一下。现有三种解决方法：
+让垂直滚动条一直显示body &#123;    overflow-y: scroll;&#125;
+即使内容高度不足一屏也会显示滚动条，比较影响用户体验
+当内容高度超过一屏时，在浏览器左侧同时加上一个滚动条宽的的padding或margin.wrap-outer &#123;    margin-left: calc(100vw - 100%);&#125;
+margin换成padding一样可以生效
+推荐使用兼容写法html &#123;    overflow-x: hidden;    overflow-y: auto;&#125;body &#123;    width: 100vw;    overflow: hidden;&#125;]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>Css</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>router</title>
     <url>//45d2f225.html</url>
     <content><![CDATA[vite现在创建的vue项目已经默认为vue3了，但是在引入vue-router时，可能会有vue-router报错问题，一直提示createRouter为undefined或者其他的关于vue-router报错的问题，主要原始是vue-router版本问题，直接升级到最新版本即可：
@@ -120,6 +107,19 @@ import &#123; createRouter, createWebHistory, RouteRecordRaw &#125; from &#x27;v
       </categories>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>flex弹性盒子布局最后一行不满时左对齐实现思路</title>
+    <url>//8513d6fd.html</url>
+    <content><![CDATA[只需要在弹性盒子的容器加一个伪类元素，大小就是盒子内容的宽高就可以实现。
+&lt;ul&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;  &lt;li&gt;&lt;/li&gt;&lt;/ul&gt;
+*&#123;    padding: 0px;    list-style: none;&#125;ul&#123;    width: 1000px;    height: 800px;    border: 1px solid #000;    display: flex;    flex-flow: row wrap;    justify-content: space-between;&#125;li&#123;    width: 300px;    height: 300px;    border: 1px solid #456;&#125;ul::after&#123;    width: 300px;    height: 300px;    content: &#x27;&#x27;;&#125;]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>Css</tag>
       </tags>
   </entry>
   <entry>
@@ -342,6 +342,73 @@ methods: &#123;    switch: function(e) &#123;        const page = getCurrentPage
       </tags>
   </entry>
   <entry>
+    <title>标准化登录与Token维护流程图</title>
+    <url>//auth-token-flow-standard.html</url>
+    <content><![CDATA[这篇文章用两张流程图讲清楚标准化登录与 Token 维护机制。
+核心结论：
+
+access token 用于业务接口鉴权，短期有效。
+refresh token 用于换新 access token，长期有效，建议放 HttpOnly Cookie。
+前端负责维护 Authorization: Bearer &lt;access token&gt;，后端负责校验与签发。
+
+图一：登录链路
+    flowchart TD
+  A[用户登录 &#x2F;api&#x2F;auth&#x2F;login] --&gt; B[后端验证凭证]
+  B --&gt; C[签发 access token]
+  B --&gt; D[Set-Cookie refreshToken HttpOnly]
+  C --&gt; E[响应 JSON token]
+  E --&gt; F[前端存内存 token]
+  F --&gt; G[设置 Authorization Bearer]
+  G --&gt; H[访问业务API]
+  H --&gt; I[后端验签通过并返回数据]
+  
+
+图二：刷新与重进链路
+    flowchart TD
+  A[业务请求返回401 access token过期] --&gt; B[前端调用 &#x2F;api&#x2F;auth&#x2F;refresh]
+  B --&gt; C[浏览器自动携带 refreshToken Cookie]
+  C --&gt; D[后端校验 refreshToken+session]
+  D --&gt;|通过| E[签发新 access token]
+  E --&gt; F[响应 JSON 新token]
+  F --&gt; G[前端覆盖旧token]
+  G --&gt; H[重试失败请求]
+
+  D --&gt;|失败| Z[跳转登录页]
+
+  Q[关闭页面] --&gt; R[内存token丢失]
+  R --&gt; S[重新打开页面]
+  S --&gt; T[启动时调用 &#x2F;api&#x2F;auth&#x2F;refresh]
+  T --&gt; C
+  
+
+一句话理解
+Cookie 的意义：安全保存刷新凭证（refresh token）。
+Bearer 的意义：每次接口请求即时鉴权（access token）。
+
+]]></content>
+      <categories>
+        <category>前端工程</category>
+      </categories>
+      <tags>
+        <tag>登录</tag>
+        <tag>Token</tag>
+        <tag>安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>项目笔记</title>
+    <url>//7705a76.html</url>
+    <content><![CDATA[1、项目网络状态监听并跳转路由onMounted(() =&gt; &#123;  window.addEventListener(&#x27;offline&#x27;, ()=&gt;&#123;    // 网络异常时触发    router.push(&#123; name: &#x27;Disconnect&#x27; &#125;)    sessionStorage.locationUrl=window.location.href;  &#125;);  window.addEventListener(&#x27;online&#x27;,()=&gt;&#123;    // 网络恢复正常时触发    window.location.href=sessionStorage.locationUrl  &#125;);&#125;)
+2、H5项目每次跳转路由滚动条回到顶部在路由守卫中配置
+document.title = to.meta.titlewindow.scrollTo(0,0)]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决iOS分发Non-public API问题</title>
     <url>//90338fix.html</url>
     <content><![CDATA[问题描述在提交 iOS 应用到 TestFlight 或 App Store 时，遇到以下错误：
@@ -376,19 +443,6 @@ React Native GitHub Issues
       </categories>
       <tags>
         <tag>React Native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>项目笔记</title>
-    <url>//7705a76.html</url>
-    <content><![CDATA[1、项目网络状态监听并跳转路由onMounted(() =&gt; &#123;  window.addEventListener(&#x27;offline&#x27;, ()=&gt;&#123;    // 网络异常时触发    router.push(&#123; name: &#x27;Disconnect&#x27; &#125;)    sessionStorage.locationUrl=window.location.href;  &#125;);  window.addEventListener(&#x27;online&#x27;,()=&gt;&#123;    // 网络恢复正常时触发    window.location.href=sessionStorage.locationUrl  &#125;);&#125;)
-2、H5项目每次跳转路由滚动条回到顶部在路由守卫中配置
-document.title = to.meta.titlewindow.scrollTo(0,0)]]></content>
-      <categories>
-        <category>Vue</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
       </tags>
   </entry>
 </search>
